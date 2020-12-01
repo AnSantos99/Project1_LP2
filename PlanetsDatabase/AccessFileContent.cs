@@ -1,47 +1,22 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
+using System.Text;
 
 namespace PlanetsDatabase
 {
-    /// <summary>
-    /// Access to content from files by opening the file
-    /// </summary>
     class AccessFileContent
     {
-        /// <summary>
-        /// To save the path of the file
-        /// </summary>
-        private string path;
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        private FileStream fs;
+        private ICollection<Planet> planetContent;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private StreamReader sr;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void AcessFile() 
+        public void SplitContent(string line) 
         {
-            path = Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.Desktop), "some.txt");
+            // split lines by ","
+            string[] sections = line.Split(",");
 
-            fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-
-            sr = new StreamReader(fs);
-
-            string line;
-
-            while ((line = sr.ReadLine()) != null)
-            {
-                Console.WriteLine(line);
-            }
-            sr.Close();
-        }   
+            // Set corresponding info to right place (Planets)
+            string pl_name = sections[0];
+            string pl_orbper = sections[1];
+            string pl_orbpertr = sections[1];
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace PlanetsDatabase
     {
         static void Main(string[] args)
         {
-            AccessFileContent file = new AccessFileContent();
+            AccessFile file = new AccessFile();
 
             file.AcessFile();
         }
