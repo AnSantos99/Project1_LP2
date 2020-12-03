@@ -18,7 +18,7 @@
         public int DiscYear { get; }
 
         /// <summary>
-        /// Distance between sun an star
+        /// Distance between sun and star
         /// </summary>
         public int SyDist { get; }
     }

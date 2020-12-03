@@ -23,11 +23,14 @@ namespace PlanetsDatabase
         /// </summary>
         protected private StreamReader sr;
 
+
         /// <summary>
         /// Access file from path and open and read it
         /// </summary>
         public void AcessFile() 
         {
+                            // --- CANT FORGET --- //
+            //Meter exceptions and using thingy com o file correto
             path = Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.Desktop), "some.txt");
 
