@@ -45,6 +45,17 @@ namespace PlanetsDatabase
                 Console.WriteLine(line);
             }
             sr.Close();
-        }   
+        }
+
+
+        public void SplitLines(string line)
+        {
+            // split lines by ","
+            string[] sections = line.Split(",");
+
+            //// Set corresponding info to right place (Planets)
+            //string pl_orbper = sections[1];
+            //string pl_orbpertr = sections[2];
+        }
     }
 }
