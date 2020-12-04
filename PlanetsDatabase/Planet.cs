@@ -12,7 +12,7 @@ namespace PlanetsDatabase
         /// <summary>
         /// Get Planet name
         /// </summary>
-        public string Name { get; }
+        public string PlanetName { get; }
 
         /// <summary>
         /// Get Orbital period in days
@@ -34,6 +34,7 @@ namespace PlanetsDatabase
         /// </summary>
         public float PlanetEqt { get; }
 
+
         /// <summary>
         /// To invoke
         /// </summary>
@@ -42,10 +43,10 @@ namespace PlanetsDatabase
         /// <param name="planetRade"> Radius of planet </param>
         /// <param name="planetMasse"> Masse of planet </param>
         /// <param name="planetEqt"> Planet temperature </param>
-        public Planet(string name, float planetOrbper, float planetRadius,
+        public Planet(string planetName, float planetOrbper, float planetRadius,
             float planetMasse, float planetEqt)
         {
-            Name = name;
+            PlanetName = planetName;
             PlanetOrbper = planetOrbper;
             PlanetRadius = planetRadius;
             PlanetMasse = planetMasse;

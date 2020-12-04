@@ -12,56 +12,65 @@ namespace PlanetsDatabase
     {
         private AccessFile file;
 
-        private UserInput input;
-
         private string readInput;
 
-        
+        private ScreenInfoText printText;
+
+
         public Motor() 
         {
             file = new AccessFile();
+
+            printText = new ScreenInfoText();
         }
 
         public void ExecuteProg() 
         {
-            ScreenInfoText.MainMenu();
+            printText.IntroMenu();
+            
+            file.AcessFile();
 
-            readInput = Console.ReadLine().ToLower();
+            //file.AcessFile();
 
-            switch (readInput)
-            {
-                case "1":
-                    Console.WriteLine("Planets Info");
-                    file.AcessFile();
-                    // Some more conditions
-                    break;
+            //printText.MainMenu();
 
-                case "2":
-                    Console.WriteLine("Stars Info");
-                    // Some more conditions
-                    break;
+            //try
+            //{
+            //    readInput = Console.ReadLine().ToLower();
 
-                case "n":
-                    Console.WriteLine("Next Page");
-                    // Some more conditions
-                    break;
+            //    switch (readInput)
+            //    {
+            //        case "1":
+            //            Console.WriteLine("Planets Info");
 
-                case "q":
-                    Console.WriteLine("Thank you");
-                    Thread.Sleep(3000);
-                    Environment.Exit(0);
-                    break;
+            //            // Some more conditions
+            //            break;
 
-                default:
-                    Console.WriteLine("" +
-                        "\t\n**Invalid Input. Please choose a valid option**");
-                    Thread.Sleep(3000);
-                    Console.Clear();
-                    ExecuteProg();
-                    break;
-            }
+            //        case "2":
+            //            Console.WriteLine("Stars Info");
+            //            // Some more conditions
+            //            break;
 
+            //        case "n":
+            //            Console.WriteLine("Next Page");
+            //            // Some more conditions
+            //            break;
 
+            //        case "q":
+            //            Console.WriteLine("Thank you");
+            //            Thread.Sleep(3000);
+            //            Environment.Exit(0);
+            //            break;
+
+            //        default:
+            //            throw new FormatException(
+            //                $"{readInput} is invalid.\n");
+            //    }
+            //}
+            //catch (FormatException e)
+            //{
+            //    Console.WriteLine($"Please choose the options available {e}");
+            //}         
         }
     }
 }

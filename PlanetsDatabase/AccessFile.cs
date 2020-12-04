@@ -14,48 +14,83 @@ namespace PlanetsDatabase
         private string path;
 
         /// <summary>
-        /// To access. open and read a file given by path
+        /// To store name of the file
         /// </summary>
-        private FileStream fs;
-
-        /// <summary>
-        /// To read the content of the file
-        /// </summary>
-        protected private StreamReader sr;
-
+        private string fileToOpen;
 
         /// <summary>
         /// Access file from path and open and read it
         /// </summary>
         public void AcessFile() 
         {
-                            // --- CANT FORGET --- //
-            //Meter exceptions and using thingy com o file correto
+            // To get the name of the file
+            fileToOpen = Console.ReadLine().ToLower();
+
+            // Specified path to open the file
             path = Path.Combine(Environment.GetFolderPath(
-                Environment.SpecialFolder.Desktop), "some.txt");
+                Environment.SpecialFolder.Desktop), fileToOpen);
 
-            fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            try
+            {
+                using (FileStream fs = new FileStream(
+                    path, FileMode.Open, FileAccess.Read))
+                {
+                    using (StreamReader sr = new StreamReader(fs))
+                    {
+                        ReadContent(sr);
+                    }
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine($"File could not be found in {path}.");
+            }
+        }
 
-            sr = new StreamReader(fs);
-
+        /// <summary>
+        /// Its only purpose is to read the files content
+        /// </summary>
+        /// <param name="sr"></param>
+        public void ReadContent(StreamReader sr) 
+        {
+            // To read each line from document
             string line;
 
             while ((line = sr.ReadLine()) != null)
             {
                 Console.WriteLine(line);
             }
-            sr.Close();
         }
 
-
-        public void SplitLines(string line)
+        /// <summary>
+        /// This method splits the files contents by the "," on each line
+        /// of the document
+        /// </summary>
+        /// <param name="line"> Receive every line read in document </param>
+        public void SplitContentInLines(string line)
         {
-            // split lines by ","
+            // Split Content of each line
             string[] sections = line.Split(",");
 
-            //// Set corresponding info to right place (Planets)
-            //string pl_orbper = sections[1];
-            //string pl_orbpertr = sections[2];
+            SeperateSections(sections);
+        }
+
+        /// <summary>
+        /// To seperate all sections from the file that we need and check
+        /// if there is any information. If not then print on screen N/A
+        /// </summary>
+        /// <param name="sections"> section that are being split </param>
+        public void SeperateSections(string[] sections) 
+        {
+            string planetName = (sections[0] != "" )? sections[0] : "N/A";
+
+            float pl_orber = float.Parse((sections[11] != "" )? sections[11] : "N/A");
+
+            float pl_rade = float.Parse((sections[13] != "" )? sections[13] : "N/A");
+
+            float pl_masse = float.Parse((sections[15] != "" )? sections[15] : "N/A");
+
+            uint pl_eqt = uint.Parse((sections[20] != "" )? sections[20] : "N/A");
         }
     }
 }
