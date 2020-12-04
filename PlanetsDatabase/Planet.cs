@@ -35,22 +35,28 @@ namespace PlanetsDatabase
         public float PlanetEqt { get; }
 
 
-        /// <summary>
-        /// To invoke
-        /// </summary>
-        /// <param name="name"> Name of Planet </param>
-        /// <param name="planetOrbper"> Orbital period in days </param>
-        /// <param name="planetRade"> Radius of planet </param>
-        /// <param name="planetMasse"> Masse of planet </param>
-        /// <param name="planetEqt"> Planet temperature </param>
-        public Planet(string planetName, float planetOrbper, float planetRadius,
-            float planetMasse, float planetEqt)
+        ///// <summary>
+        ///// To invoke
+        ///// </summary>
+        ///// <param name="name"> Name of Planet </param>
+        ///// <param name="planetOrbper"> Orbital period in days </param>
+        ///// <param name="planetRade"> Radius of planet </param>
+        ///// <param name="planetMasse"> Masse of planet </param>
+        ///// <param name="planetEqt"> Planet temperature </param>
+        //public Planet(string planetName, float planetOrbper, float planetRadius,
+        //    float planetMasse, float planetEqt)
+        //{
+        //    PlanetName = planetName;
+        //    PlanetOrbper = planetOrbper;
+        //    PlanetRadius = planetRadius;
+        //    PlanetMasse = planetMasse;
+        //    PlanetEqt = planetEqt;
+        //}
+
+
+        public Planet(string planetName)
         {
             PlanetName = planetName;
-            PlanetOrbper = planetOrbper;
-            PlanetRadius = planetRadius;
-            PlanetMasse = planetMasse;
-            PlanetEqt = planetEqt;
         }
 
     }

@@ -39,6 +39,11 @@ namespace PlanetsDatabase
                 "");
         }
 
+        public void PlanetName() 
+        {
+            Console.WriteLine("Name a planet: ");
+        }
+
         /// <summary>
         /// Secondary screen information on console by choosing option 2
         /// from Main Menu

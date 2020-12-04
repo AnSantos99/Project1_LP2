@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace PlanetsDatabase
 {
@@ -17,6 +19,13 @@ namespace PlanetsDatabase
         /// To store name of the file
         /// </summary>
         private string fileToOpen;
+
+        private ICollection<Planet> inputContentCollection;
+
+        public AccessFile() 
+        {
+            inputContentCollection = new List<Planet>();
+        }
 
         /// <summary>
         /// Access file from path and open and read it
@@ -58,7 +67,15 @@ namespace PlanetsDatabase
 
             while ((line = sr.ReadLine()) != null)
             {
-                Console.WriteLine(line);
+                if (line.StartsWith("#") || line.StartsWith(" "))
+                {
+                    continue;
+                }
+                else 
+                {
+                    //Console.WriteLine(line);
+                    SplitContentInLines(line);
+                }
             }
         }
 
@@ -82,15 +99,27 @@ namespace PlanetsDatabase
         /// <param name="sections"> section that are being split </param>
         public void SeperateSections(string[] sections) 
         {
-            string planetName = (sections[0] != "" )? sections[0] : "N/A";
+            string planetName = ((sections[0]) != "") ? sections[0] : "N/A";
 
-            float pl_orber = float.Parse((sections[11] != "" )? sections[11] : "N/A");
+            //string pl_orber = ((sections[1]) != "" )? sections[1] : "N/A";
 
-            float pl_rade = float.Parse((sections[13] != "" )? sections[13] : "N/A");
+            //float pl_rade = float.Parse((sections[13] != "" )? sections[13] : "N/A");
 
-            float pl_masse = float.Parse((sections[15] != "" )? sections[15] : "N/A");
+            //float pl_masse = float.Parse((sections[15] != "" )? sections[15] : "N/A");
 
-            uint pl_eqt = uint.Parse((sections[20] != "" )? sections[20] : "N/A");
+            //uint pl_eqt = uint.Parse((sections[20] != "" )? sections[20] : "N/A");
+
+            // To test if it works
+            Console.WriteLine(planetName);
+
+            //inputContentCollection.Add(new Planet(planetName));
+
+            //foreach (Planet item in inputContentCollection)
+            //{
+            //    Console.WriteLine(item);
+            //}
         }
+
+        
     }
 }

@@ -12,16 +12,20 @@ namespace PlanetsDatabase
     {
         private AccessFile file;
 
-        private string readInput;
-
         private ScreenInfoText printText;
 
+        private InputContent inputCont;
 
+        /// <summary>
+        /// Used to initialize variables
+        /// </summary>
         public Motor() 
         {
             file = new AccessFile();
 
             printText = new ScreenInfoText();
+
+            inputCont = new InputContent();
         }
 
         public void ExecuteProg() 
@@ -30,47 +34,9 @@ namespace PlanetsDatabase
             
             file.AcessFile();
 
-            //file.AcessFile();
-
             //printText.MainMenu();
 
-            //try
-            //{
-            //    readInput = Console.ReadLine().ToLower();
-
-            //    switch (readInput)
-            //    {
-            //        case "1":
-            //            Console.WriteLine("Planets Info");
-
-            //            // Some more conditions
-            //            break;
-
-            //        case "2":
-            //            Console.WriteLine("Stars Info");
-            //            // Some more conditions
-            //            break;
-
-            //        case "n":
-            //            Console.WriteLine("Next Page");
-            //            // Some more conditions
-            //            break;
-
-            //        case "q":
-            //            Console.WriteLine("Thank you");
-            //            Thread.Sleep(3000);
-            //            Environment.Exit(0);
-            //            break;
-
-            //        default:
-            //            throw new FormatException(
-            //                $"{readInput} is invalid.\n");
-            //    }
-            //}
-            //catch (FormatException e)
-            //{
-            //    Console.WriteLine($"Please choose the options available {e}");
-            //}         
+            //inputCont.MainMenuInput();
         }
     }
 }
