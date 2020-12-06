@@ -19,11 +19,6 @@ namespace PlanetsDatabase
         /// </summary>
         private ICollection<Stars> starsCollection;
 
-        /// <summary>
-        /// To save the found results into this collection
-        /// </summary>
-        private ICollection<Planet> organnizedPlanetCollection;
-
         // Maximum contents that can be showed on the screen
         private const uint LINES_TO_DISPLAY_ON_SCREEN = 20;
 
@@ -31,15 +26,15 @@ namespace PlanetsDatabase
         private uint contentFoundInFile;
 
         // Save input from user
-        private string searchedName;
+        private string searched;
 
 
 
-        public HandleData(ICollection<Planet> planetCollection,
-            int? foundIn) 
-        {
-            planetCollection = new List<Planet>();
-        }
+        //public HandleData(ICollection<Planet> planetCollection,
+        //    int? foundInFile, searched) 
+        //{
+        //    planetCollection = new List<Planet>();
+        //}
 
         public void PlanetsData() 
         {

@@ -20,11 +20,11 @@ namespace PlanetsDatabase
         /// </summary>
         private string fileToOpen;
 
-        private ICollection<Planet> inputContentCollection;
+        //private ICollection<Planet> inputContentCollection;
 
         public AccessFile() 
         {
-            inputContentCollection = new List<Planet>();
+            //inputContentCollection = new List<Planet>();
         }
 
         /// <summary>
@@ -71,10 +71,11 @@ namespace PlanetsDatabase
                 {
                     continue;
                 }
+                   
                 else 
                 {
                     //Console.WriteLine(line);
-                    SplitContentInLines(line);
+                    SplitContent(line);
                 }
             }
         }
@@ -84,7 +85,7 @@ namespace PlanetsDatabase
         /// of the document
         /// </summary>
         /// <param name="line"> Receive every line read in document </param>
-        public void SplitContentInLines(string line)
+        public void SplitContent(string line)
         {
             // Split Content of each line
             string[] sections = line.Split(",");
@@ -92,16 +93,27 @@ namespace PlanetsDatabase
             SeperateSections(sections);
         }
 
+        Dictionary<string, string> plDict;
+
+
         /// <summary>
         /// To seperate all sections from the file that we need and check
         /// if there is any information. If not then print on screen N/A
         /// </summary>
         /// <param name="sections"> section that are being split </param>
-        public void SeperateSections(string[] sections) 
+        public void SeperateSections(string[] sections)
         {
-            string planetName = ((sections[0]) != "") ? sections[0] : "N/A";
+            plDict = new Dictionary<string, string>();
 
-            //string pl_orber = ((sections[1]) != "" )? sections[1] : "N/A";
+            //string planetName = ((sections[0]) != "") ? sections[0] : "N/A";
+
+            string planetName = "pl_name";
+
+            plDict.Add(planetName, sections[0]);
+
+            //string input = Console.ReadLine();
+
+            //string hostName = ((sections[1]) != "" )? sections[1] : "N/A";
 
             //float pl_rade = float.Parse((sections[13] != "" )? sections[13] : "N/A");
 
@@ -110,16 +122,16 @@ namespace PlanetsDatabase
             //uint pl_eqt = uint.Parse((sections[20] != "" )? sections[20] : "N/A");
 
             // To test if it works
-            Console.WriteLine(planetName);
+
 
             //inputContentCollection.Add(new Planet(planetName));
 
-            //foreach (Planet item in inputContentCollection)
-            //{
-            //    Console.WriteLine(item);
-            //}
+            foreach (KeyValuePair<string, string> item in plDict)
+            {
+                Console.WriteLine(item.Value);
+            }
         }
 
-        
+
     }
 }

@@ -7,7 +7,7 @@ namespace PlanetsDatabase
     /// <summary>
     /// Class Stars that contains every feature a star has
     /// </summary>
-    class Stars
+    class Stars : IAdditionalCamps
     {
         /// <summary>
         /// Get Star temperature
@@ -38,6 +38,26 @@ namespace PlanetsDatabase
         /// Get Star rotation period in days
         /// </summary>
         public float StarRotq { get; }
+
+        /// <summary>
+        /// Get host name of star that orbits the planet
+        /// </summary>
+        public string HostName { get; }
+
+        /// <summary>
+        /// Discovery method
+        /// </summary>
+        public string DiscoveryMethod { get; }
+
+        /// <summary>
+        /// Get Discovery year
+        /// </summary>
+        public int DiscYear { get; }
+
+        /// <summary>
+        /// Distance between sun and star
+        /// </summary>
+        public int SyDist { get; }
 
         /// <summary>
         /// 
