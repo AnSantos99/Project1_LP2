@@ -17,22 +17,22 @@ namespace PlanetsDatabase
         /// <summary>
         /// Get Orbital period in days
         /// </summary>
-        public float PlanetOrbper { get; }
+        public string PlanetOrbper { get; }
 
         /// <summary>
         /// Get planet radius comparing to planet earth
         /// </summary>
-        public float PlanetRadius { get; }
+        public string PlanetRadius { get; }
 
         /// <summary>
         /// Get planet Mass comparing comparing to earth
         /// </summary>
-        public float PlanetMasse { get; }
+        public string PlanetMasse { get; }
 
         /// <summary>
         /// Get planet temperature in kelvins
         /// </summary>
-        public float PlanetEqt { get; }
+        public string PlanetEqt { get; }
 
         /// <summary>
         /// Get host name of star that orbits the planet
@@ -47,37 +47,38 @@ namespace PlanetsDatabase
         /// <summary>
         /// Get Discovery year
         /// </summary>
-        public int DiscYear { get; }
+        public string DiscYear { get; }
 
         /// <summary>
         /// Distance between sun and star
         /// </summary>
-        public int SyDist { get; }
+        public string SyDist { get; }
 
 
-        ///// <summary>
-        ///// To invoke
-        ///// </summary>
-        ///// <param name="name"> Name of Planet </param>
-        ///// <param name="planetOrbper"> Orbital period in days </param>
-        ///// <param name="planetRade"> Radius of planet </param>
-        ///// <param name="planetMasse"> Masse of planet </param>
-        ///// <param name="planetEqt"> Planet temperature </param>
-        //public Planet(string planetName, float planetOrbper, float planetRadius,
-        //    float planetMasse, float planetEqt)
-        //{
-        //    PlanetName = planetName;
-        //    PlanetOrbper = planetOrbper;
-        //    PlanetRadius = planetRadius;
-        //    PlanetMasse = planetMasse;
-        //    PlanetEqt = planetEqt;
-        //}
-
-
-        public Planet(string planetName)
+        /// <summary>
+        /// To invoke
+        /// </summary>
+        /// <param name="name"> Name of Planet </param>
+        /// <param name="planetOrbper"> Orbital period in days </param>
+        /// <param name="planetRade"> Radius of planet </param>
+        /// <param name="planetMasse"> Masse of planet </param>
+        /// <param name="planetEqt"> Planet temperature </param>
+        public Planet(string planetName, string planetOrbper, string planetRadius,
+            string planetMasse, string planetEqt,string hostname, 
+            string discoveryMeth, string discYear, string syDist)
         {
             PlanetName = planetName;
+            PlanetOrbper = planetOrbper;
+            PlanetRadius = planetRadius;
+            PlanetMasse = planetMasse;
+            PlanetEqt = planetEqt;
+            HostName = hostname;
+            DiscoveryMethod = discoveryMeth;
+            DiscYear = discYear;
+            SyDist = syDist;
         }
+
+        public Planet() { }
 
     }
 }

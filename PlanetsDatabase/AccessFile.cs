@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PlanetsDatabase
 {
@@ -20,11 +21,15 @@ namespace PlanetsDatabase
         /// </summary>
         private string fileToOpen;
 
-        //private ICollection<Planet> inputContentCollection;
+        private ICollection<Planet> inputContentCollPlanet;
+
+        private HandleData handleData;
+
+        private InputContent inputContent;
 
         public AccessFile() 
         {
-            //inputContentCollection = new List<Planet>();
+            
         }
 
         /// <summary>
@@ -62,6 +67,11 @@ namespace PlanetsDatabase
         /// <param name="sr"></param>
         public void ReadContent(StreamReader sr) 
         {
+            int count = 0;
+
+            inputContentCollPlanet = new List<Planet>(count);
+
+
             // To read each line from document
             string line;
 
@@ -71,13 +81,17 @@ namespace PlanetsDatabase
                 {
                     continue;
                 }
-                   
+
                 else 
                 {
-                    //Console.WriteLine(line);
                     SplitContent(line);
                 }
             }
+
+            handleData = new HandleData(
+                inputContentCollPlanet, count, inputContent);
+            handleData.SetResultsPlanets();
+
         }
 
         /// <summary>
@@ -87,50 +101,141 @@ namespace PlanetsDatabase
         /// <param name="line"> Receive every line read in document </param>
         public void SplitContent(string line)
         {
-            // Split Content of each line
-            string[] sections = line.Split(",");
+            inputContentCollPlanet = new List<Planet>();
 
-            SeperateSections(sections);
+            // Split Planet Content of the file and put each section
+            // in an strings array
+            string[] pl_name = line.Split(",");
+            string planetName = ((pl_name[0]) != "") ? pl_name[0] : "N/A";
+
+            string[] host_name = line.Split(",");
+            string hostName = ((host_name[1]) != "") ? host_name[1] : "N/A";
+
+            string[] dis_Method = line.Split(",");
+            string discMethod = ((dis_Method[5]) != "") ? dis_Method[5] : "N/A";
+
+            string[] disc_year = line.Split(",");
+            string discYear = ((disc_year[6]) != "") ? disc_year[6] : "N/A";
+
+            string[] pl_orber = line.Split(",");
+            string plOrber = ((pl_orber[11]) != "") ? pl_orber[11] : "N/A";
+
+            string[] pl_rade = line.Split(",");
+            string plRade = ((pl_rade[13]) != "") ? pl_rade[13] : "N/A";
+
+            string[] pl_masse = line.Split(",");
+            string plMasse = ((pl_masse[15]) != "") ? pl_masse[15] : "N/A";
+
+            string[] pl_Eqt = line.Split(",");
+            string plEqt = ((pl_Eqt[20]) != "") ? pl_Eqt[20] : "-";
+
+            string[] sy_Dist = line.Split(",");
+            string syDist = ((sy_Dist[34]) != "") ? sy_Dist[34] : "-";
+
+            //For testing
+            //Console.WriteLine($"{planetName}\t{hostName}\t{discMethod}\t{discYear}\t{plOrber}\t{plRade}\t{plMasse}\t{plEqt}\t");
+
+            
+
+            //---------------------------------------------------------------//
         }
-
-        Dictionary<string, string> plDict;
-
 
         /// <summary>
-        /// To seperate all sections from the file that we need and check
-        /// if there is any information. If not then print on screen N/A
+        /// This method splits the files contents by the "," on each line
+        /// of the document
         /// </summary>
-        /// <param name="sections"> section that are being split </param>
-        public void SeperateSections(string[] sections)
+        /// <param name="line"> Receive every line read in document </param>
+        public void SplitContent(string line)
         {
-            plDict = new Dictionary<string, string>();
+            inputContentCollPlanet = new List<Planet>();
 
-            //string planetName = ((sections[0]) != "") ? sections[0] : "N/A";
+            // Split Planet Content of the file and put each section
+            // in an strings array
+            string[] pl_name = line.Split(",");
+            string planetName = ((pl_name[0]) != "") ? pl_name[0] : "N/A";
 
-            string planetName = "pl_name";
+            string[] host_name = line.Split(",");
+            string hostName = ((host_name[1]) != "") ? host_name[1] : "N/A";
 
-            plDict.Add(planetName, sections[0]);
+            string[] dis_Method = line.Split(",");
+            string discMethod = ((dis_Method[5]) != "") ? dis_Method[5] : "N/A";
 
-            //string input = Console.ReadLine();
+            string[] disc_year = line.Split(",");
+            string discYear = ((disc_year[6]) != "") ? disc_year[6] : "N/A";
 
-            //string hostName = ((sections[1]) != "" )? sections[1] : "N/A";
+            string[] pl_orber = line.Split(",");
+            string plOrber = ((pl_orber[11]) != "") ? pl_orber[11] : "N/A";
 
-            //float pl_rade = float.Parse((sections[13] != "" )? sections[13] : "N/A");
+            string[] pl_rade = line.Split(",");
+            string plRade = ((pl_rade[13]) != "") ? pl_rade[13] : "N/A";
 
-            //float pl_masse = float.Parse((sections[15] != "" )? sections[15] : "N/A");
+            string[] pl_masse = line.Split(",");
+            string plMasse = ((pl_masse[15]) != "") ? pl_masse[15] : "N/A";
 
-            //uint pl_eqt = uint.Parse((sections[20] != "" )? sections[20] : "N/A");
+            string[] pl_Eqt = line.Split(",");
+            string plEqt = ((pl_Eqt[20]) != "") ? pl_Eqt[20] : "-";
 
-            // To test if it works
+            string[] sy_Dist = line.Split(",");
+            string syDist = ((sy_Dist[34]) != "") ? sy_Dist[34] : "-";
+
+            //For testing
+            //Console.WriteLine($"{planetName}\t{hostName}\t{discMethod}\t{discYear}\t{plOrber}\t{plRade}\t{plMasse}\t{plEqt}\t");
 
 
-            //inputContentCollection.Add(new Planet(planetName));
 
-            foreach (KeyValuePair<string, string> item in plDict)
-            {
-                Console.WriteLine(item.Value);
-            }
+            //---------------------------------------------------------------//
         }
+
+        public void checkData(string[] sections)
+        {
+        
+            // To go throught sections and store those 2 searched strings
+            // in this variable
+            IEnumerable<string> obligatoryCamps;
+
+            // To go through file and see if it has this 2 obligatory camps
+            obligatoryCamps = from lines in sections
+                                where lines.Contains("pl_name".ToLower()) ||
+                                lines.Contains("hostname".ToLower())
+                                select lines;
+
+            //if (!obligatoryCamps.Any())
+            //{
+            //    Console.Write("This file does not contain the obligatory" +
+            //    "Camps needed in order to use this program properly.\n" +
+            //    "Obligatory camps are:\npl_name (Planet names) and " +
+            //    "hostname.\n");
+            //}
+        }
+
+
+
+
+        //dataNeeded = from data in sections
+        //             where data.Contains("pl_") || data.Contains("st_")
+        //             select data;
+
+
+        //plDict = new Dictionary<string, string>();
+
+        ////string planetName = ((sections[0]) != "") ? sections[0] : "N/A";
+
+        //string planetName = "pl_name";
+
+        //plDict.Add(planetName, sections[0]);
+
+        ////string input = Console.ReadLine();
+
+        
+        //// To test if it works
+
+
+        ////inputContentCollection.Add(new Planet(planetName));
+
+        //foreach (KeyValuePair<string, string> item in plDict)
+        //{
+        //    Console.WriteLine(item.Value);
+        //}
 
 
     }

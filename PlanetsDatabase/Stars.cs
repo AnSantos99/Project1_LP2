@@ -12,32 +12,32 @@ namespace PlanetsDatabase
         /// <summary>
         /// Get Star temperature
         /// </summary>
-        public float StarTemperature { get; }
+        public string StarTemperature { get; }
 
         /// <summary>
         /// Get Star radius
         /// </summary>
-        public float StarRadius { get; }
+        public string StarRadius { get; }
 
         /// <summary>
         /// Get Star mass
         /// </summary>
-        public float StarMass { get; }
+        public string StarMass { get; }
 
         /// <summary>
         /// Get Star Age
         /// </summary>
-        public float StarAge { get; }
+        public string StarAge { get; }
 
         /// <summary>
         /// Get Star rotation velocity in km/s 
         /// </summary>
-        public float StarVsin { get; }
+        public string StarVsin { get; }
 
         /// <summary>
         /// Get Star rotation period in days
         /// </summary>
-        public float StarRotq { get; }
+        public string StarRotq { get; }
 
         /// <summary>
         /// Get host name of star that orbits the planet
@@ -52,12 +52,12 @@ namespace PlanetsDatabase
         /// <summary>
         /// Get Discovery year
         /// </summary>
-        public int DiscYear { get; }
+        public string DiscYear { get; }
 
         /// <summary>
         /// Distance between sun and star
         /// </summary>
-        public int SyDist { get; }
+        public string SyDist { get; }
 
         /// <summary>
         /// 
@@ -68,8 +68,8 @@ namespace PlanetsDatabase
         /// <param name="starAge"></param>
         /// <param name="starVsin"></param>
         /// <param name="starRotq"></param>
-        public Stars(float starTemperatur, float starRadius, float starMass,
-            float starAge, float starVsin, float starRotq) 
+        public Stars(string starTemperatur, string starRadius, string starMass,
+            string starAge, string starVsin, string starRotq) 
         {
             StarTemperature = starTemperatur;
             StarRadius = starRadius;

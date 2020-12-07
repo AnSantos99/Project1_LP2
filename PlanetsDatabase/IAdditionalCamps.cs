@@ -15,11 +15,11 @@
         /// <summary>
         /// Get Discovery year
         /// </summary>
-        public int DiscYear { get; }
+        public string DiscYear { get; }
 
         /// <summary>
         /// Distance between sun and star
         /// </summary>
-        public int SyDist { get; }
+        public string SyDist { get; }
     }
 }

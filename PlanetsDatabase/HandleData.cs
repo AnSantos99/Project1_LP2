@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace PlanetsDatabase
 {
@@ -23,36 +24,145 @@ namespace PlanetsDatabase
         private const uint LINES_TO_DISPLAY_ON_SCREEN = 20;
 
         // Number of content found in file
-        private uint contentFoundInFile;
+        private int contentFoundInFile;
 
         // Save input from user
-        private string searched;
+        private InputContent inputContent;
 
+        // Variables to store each camp input
+        private string hostname;
+        private string discovMethod;
+        private uint discYear;
+        private float syDist;
 
+        private string plName;
+        private float plOrber;
+        private float plRadius;
+        private float plMasse;
+        private float plEqt;
 
-        //public HandleData(ICollection<Planet> planetCollection,
-        //    int? foundInFile, searched) 
-        //{
-        //    planetCollection = new List<Planet>();
-        //}
+        private float starTemp;
+        private float starRadius;
+        private float starMass;
+        private float starAge;
+        private float starVsin;
+        private float starRotq;
 
-        public void PlanetsData() 
+        private List<Planet> organizedContentsPlanets;
+        private List<Stars> organizedContentsStars;
+
+        public HandleData(ICollection<Planet> dataContents, int? numOfContents,
+            InputContent inputContent) 
         {
-            string[] data;
+            this.inputContent = inputContent;
 
-            //string planetName = data[0];
+            planetCollection = dataContents ?? null;
 
-            //float pl_orber = float.Parse((sections[11] != "") ? sections[11] : "N/A");
+            contentFoundInFile = numOfContents ?? 0;
 
-            //float pl_rade = float.Parse((sections[13] != "") ? sections[13] : "N/A");
+            hostname = inputContent.HostName;
+            discovMethod = inputContent.DiscoveryMethod;
+            discYear = uint.Parse(inputContent.DiscYear);
+            syDist = float.Parse(inputContent.SyDist);
 
-            //float pl_masse = float.Parse((sections[15] != "") ? sections[15] : "N/A");
+            plName = inputContent.PlanetName;
+            plOrber = float.Parse(inputContent.PlanetOrbper);
+            plRadius = float.Parse(inputContent.PlanetRadius);
+            plMasse = float.Parse(inputContent.PlanetMasse);
+            plEqt = float.Parse(inputContent.PlanetEqt);
 
-            //uint pl_eqt = uint.Parse((sections[20] != "") ? sections[20] : "N/A");
+            organizedContentsPlanets = new List<Planet>(contentFoundInFile);  
+        }
 
-            //planetCollection.Add(new Planet());
+        public HandleData(ICollection<Stars> dataContents, int? numOfContents,
+            InputContent inputContent)
+        {
+            this.inputContent = inputContent;
+
+            starsCollection = dataContents ?? null;
+
+            contentFoundInFile = numOfContents ?? 0;
+
+            hostname = inputContent.HostName;
+            discovMethod = inputContent.DiscoveryMethod;
+            discYear = uint.Parse(inputContent.DiscYear);
+            syDist = float.Parse(inputContent.SyDist);
+
+            starTemp = float.Parse(inputContent.StarTemperature);
+            starRadius = float.Parse(inputContent.StarRadius);
+            starMass = float.Parse(inputContent.StarMass);
+            starAge = float.Parse(inputContent.StarAge);
+            starVsin = float.Parse(inputContent.StarVsin);
+            starRotq = float.Parse(inputContent.StarRotq);
+
+            organizedContentsStars = new List<Stars>(contentFoundInFile);
         }
 
         
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SetResultsPlanets()
+        {
+            Console.WriteLine(hostname);
+            Console.WriteLine(discovMethod);
+            Console.WriteLine(discYear);
+            Console.WriteLine(syDist);
+
+            Console.WriteLine(plName);
+            Console.WriteLine(plOrber);
+            Console.WriteLine(plRadius);
+            Console.WriteLine(plMasse);
+            Console.WriteLine(plEqt);
+
+            Console.WriteLine(starTemp);
+            Console.WriteLine(starRadius);
+            Console.WriteLine(starMass);
+            Console.WriteLine(starAge);
+            Console.WriteLine(starVsin);
+            Console.WriteLine(starRotq);
+
+            organizedContentsPlanets =
+                (from content in planetCollection
+                 where (content.HostName).ToLower().
+                 Contains(hostname.ToLower())
+                 where (content.DiscoveryMethod).ToLower().
+                 Contains(discovMethod.ToLower())
+                 where (content.DiscYear.Equals(discYear))
+                 where (content.SyDist).Equals(syDist)
+
+                 where (content.PlanetName).ToLower().
+                 Contains(plName.ToLower())
+                 where (content.PlanetOrbper).Equals(plOrber)
+                 where (content.PlanetOrbper).Equals(plOrber)
+                 where (content.PlanetRadius).Equals(plRadius)
+                 where (content.PlanetMasse).Equals(plMasse)
+                 where (content.PlanetEqt).Equals(plEqt)
+
+                 select new Planet(content.PlanetName, content.PlanetOrbper,
+                 content.PlanetRadius, content.PlanetMasse, content.PlanetEqt,
+                 content.HostName, content.DiscoveryMethod, content.DiscYear,
+                 content.SyDist)).ToList();
+
+            SortList(organizedContentsPlanets);
+        }
+
+        /// <summary>
+        /// Sort the list by the planets name
+        /// </summary>
+        /// <param name="pl"></param>
+        public void SortList(List<Planet> pl)
+        {
+            pl.OrderByDescending(name => name.PlanetName);
+        }
+
+        /// <summary>
+        /// Sort the list by the planets name
+        /// </summary>
+        /// <param name="pl"></param>
+        public void SortList(List<Stars> st)
+        {
+            st.OrderByDescending(name => name.HostName);
+        }
     }
 }

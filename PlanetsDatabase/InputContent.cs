@@ -7,15 +7,33 @@ namespace PlanetsDatabase
 {
     class InputContent
     {
-        private string readInput;
+        public string readInput { get; set; }
 
-        private Planet pl;
+        // General search for planet camps
+        public string PlanetName { get; set; }
+        public string PlanetOrbper { get; set; }
+        public string PlanetRadius { get; set; }
+        public string PlanetMasse { get; set; }
+        public string PlanetEqt { get; set; }
 
 
-        public InputContent() 
-        {
-            
-        }
+        // General search for star camps
+        public string StarTemperature { get; set; }
+        public string StarRadius { get; set; }
+        public string StarMass { get; set; }
+        public string StarAge { get; set; }
+        public string StarVsin { get; set; }
+        public string StarRotq { get; set; }
+
+
+
+        //General camps for search
+        public string HostName { get; set; }
+        public string DiscoveryMethod { get; set; }
+        public string DiscYear { get; set; }
+        public string SyDist { get; set; }
+
+
         public void MainMenuInput() 
         {
             try
