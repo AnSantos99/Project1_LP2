@@ -12,52 +12,52 @@ namespace PlanetsDatabase
         /// <summary>
         /// Get Star temperature
         /// </summary>
-        public string StarTemperature { get; }
+        public string StarTemperature { get; set; }
 
         /// <summary>
         /// Get Star radius
         /// </summary>
-        public string StarRadius { get; }
+        public string Radius { get; set; }
 
         /// <summary>
         /// Get Star mass
         /// </summary>
-        public string StarMass { get; }
+        public string Masse { get; set; }
 
         /// <summary>
         /// Get Star Age
         /// </summary>
-        public string StarAge { get; }
+        public string StarAge { get; set; }
 
         /// <summary>
         /// Get Star rotation velocity in km/s 
         /// </summary>
-        public string StarVsin { get; }
+        public string StarVsin { get; set; }
 
         /// <summary>
         /// Get Star rotation period in days
         /// </summary>
-        public string StarRotq { get; }
+        public string StarRotq { get; set; }
 
         /// <summary>
         /// Get host name of star that orbits the planet
         /// </summary>
-        public string HostName { get; }
+        public string HostName { get; set; }
 
         /// <summary>
         /// Discovery method
         /// </summary>
-        public string DiscoveryMethod { get; }
+        public string DiscoveryMethod { get; set; }
 
         /// <summary>
         /// Get Discovery year
         /// </summary>
-        public string DiscYear { get; }
+        public string DiscYear { get; set; }
 
         /// <summary>
         /// Distance between sun and star
         /// </summary>
-        public string SyDist { get; }
+        public string SyDist { get; set; }
 
         /// <summary>
         /// 
@@ -72,8 +72,8 @@ namespace PlanetsDatabase
             string starAge, string starVsin, string starRotq) 
         {
             StarTemperature = starTemperatur;
-            StarRadius = starRadius;
-            StarMass = starMass;
+            Radius = starRadius;
+            Masse = starMass;
             StarAge = starAge;
             StarVsin = starVsin;
             StarRotq = starRotq;

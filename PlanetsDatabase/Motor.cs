@@ -19,7 +19,7 @@ namespace PlanetsDatabase
         /// <summary>
         /// Used to initialize variables
         /// </summary>
-        public Motor() 
+        public Motor()
         {
             file = new AccessFile();
 
@@ -28,15 +28,16 @@ namespace PlanetsDatabase
             inputCont = new InputContent();
         }
 
-        public void ExecuteProg() 
+        public void ExecuteProg()
         {
             printText.IntroMenu();
-            
+
             file.AcessFile();
 
             //printText.MainMenu();
 
-            //inputCont.MainMenuInput();
+            ////////////////////// SEND FILE TO INPUT CONTENT
+            ///inputCont.MainMenuInput(file);
         }
     }
 }

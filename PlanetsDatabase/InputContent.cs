@@ -7,34 +7,26 @@ namespace PlanetsDatabase
 {
     class InputContent
     {
+        private AccessFile file;
+
+        public HandleData DatabaseContent;
+
+        public InputContent() { }
+
+
+        public InputContent(AccessFile file)
+        {
+            this.file = file;
+        }
+
+        /// <summary>
+        /// To get the input of the user
+        /// </summary>
         public string readInput { get; set; }
 
-        // General search for planet camps
-        public string PlanetName { get; set; }
-        public string PlanetOrbper { get; set; }
-        public string PlanetRadius { get; set; }
-        public string PlanetMasse { get; set; }
-        public string PlanetEqt { get; set; }
+        private Planet plCamp;
 
-
-        // General search for star camps
-        public string StarTemperature { get; set; }
-        public string StarRadius { get; set; }
-        public string StarMass { get; set; }
-        public string StarAge { get; set; }
-        public string StarVsin { get; set; }
-        public string StarRotq { get; set; }
-
-
-
-        //General camps for search
-        public string HostName { get; set; }
-        public string DiscoveryMethod { get; set; }
-        public string DiscYear { get; set; }
-        public string SyDist { get; set; }
-
-
-        public void MainMenuInput() 
+        public void MainMenuInput()
         {
             try
             {
@@ -44,8 +36,11 @@ namespace PlanetsDatabase
                 {
                     case "1":
                         Console.WriteLine("Planets Info");
-                        Console.WriteLine("Write Down name:");
-                        PlanetInput();
+                        Console.WriteLine("Write down name:");
+                        UserInputPlanet();
+                        //DatabaseContent = new HandleData(file.ListOfContent, input);
+                        //DatabaseContent.SetResults();
+
                         break;
 
                     case "2":
@@ -69,9 +64,16 @@ namespace PlanetsDatabase
             }
         }
 
-        public void PlanetInput()
+        public void UserInputPlanet()
         {
             readInput = Console.ReadLine().ToLower();
+
+            plCamp = new Planet(plCamp.PlanetName, plCamp.PlanetOrbper, 
+                plCamp.Radius, plCamp.Masse, plCamp.PlanetEqt, plCamp.HostName,
+                plCamp.DiscoveryMethod, plCamp.DiscYear, plCamp.SyDist);
+
+            //DatabaseContent = new HandleData(Planet, File.list);
+
         }
 
     }

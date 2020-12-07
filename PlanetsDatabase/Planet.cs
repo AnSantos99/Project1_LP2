@@ -12,47 +12,47 @@ namespace PlanetsDatabase
         /// <summary>
         /// Get Planet name
         /// </summary>
-        public string PlanetName { get; }
+        public string PlanetName { get; set; }
 
         /// <summary>
         /// Get Orbital period in days
         /// </summary>
-        public string PlanetOrbper { get; }
+        public string PlanetOrbper { get; set; }
 
         /// <summary>
         /// Get planet radius comparing to planet earth
         /// </summary>
-        public string PlanetRadius { get; }
+        public string Radius { get; set; }
 
         /// <summary>
         /// Get planet Mass comparing comparing to earth
         /// </summary>
-        public string PlanetMasse { get; }
+        public string Masse { get; set; }
 
         /// <summary>
         /// Get planet temperature in kelvins
         /// </summary>
-        public string PlanetEqt { get; }
+        public string PlanetEqt { get; set; }
 
         /// <summary>
         /// Get host name of star that orbits the planet
         /// </summary>
-        public string HostName { get; }
+        public string HostName { get; set; }
 
         /// <summary>
         /// Discovery method
         /// </summary>
-        public string DiscoveryMethod { get; }
+        public string DiscoveryMethod { get; set; }
 
         /// <summary>
         /// Get Discovery year
         /// </summary>
-        public string DiscYear { get; }
+        public string DiscYear { get; set; }
 
         /// <summary>
         /// Distance between sun and star
         /// </summary>
-        public string SyDist { get; }
+        public string SyDist { get; set; }
 
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace PlanetsDatabase
         {
             PlanetName = planetName;
             PlanetOrbper = planetOrbper;
-            PlanetRadius = planetRadius;
-            PlanetMasse = planetMasse;
+            Radius = planetRadius;
+            Masse = planetMasse;
             PlanetEqt = planetEqt;
             HostName = hostname;
             DiscoveryMethod = discoveryMeth;

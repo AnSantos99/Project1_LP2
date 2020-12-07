@@ -27,7 +27,7 @@ namespace PlanetsDatabase
         private int contentFoundInFile;
 
         // Save input from user
-        private InputContent inputContent;
+        private Planet inputContentPl;
 
         // Variables to store each camp input
         private string hostname;
@@ -51,10 +51,13 @@ namespace PlanetsDatabase
         private List<Planet> organizedContentsPlanets;
         private List<Stars> organizedContentsStars;
 
-        public HandleData(ICollection<Planet> dataContents, int? numOfContents,
-            InputContent inputContent) 
+        public HandleData(List<Planet> dataContents, AccessFile file)
         {
-            this.inputContent = inputContent;
+            Planet inputContent = new Planet();
+
+            int? numOfContents = 0;
+
+            this.inputContentPl = inputContent;
 
             planetCollection = dataContents ?? null;
 
@@ -67,38 +70,61 @@ namespace PlanetsDatabase
 
             plName = inputContent.PlanetName;
             plOrber = float.Parse(inputContent.PlanetOrbper);
-            plRadius = float.Parse(inputContent.PlanetRadius);
-            plMasse = float.Parse(inputContent.PlanetMasse);
+            plRadius = float.Parse(inputContent.Radius);
+            plMasse = float.Parse(inputContent.Masse);
             plEqt = float.Parse(inputContent.PlanetEqt);
 
-            organizedContentsPlanets = new List<Planet>(contentFoundInFile);  
+            organizedContentsPlanets = new List<Planet>(contentFoundInFile);
         }
 
-        public HandleData(ICollection<Stars> dataContents, int? numOfContents,
-            InputContent inputContent)
-        {
-            this.inputContent = inputContent;
+        //public HandleData(ICollection<Planet> dataContents, int? numOfContents,
+        //    Planet inputContent) 
+        //{
+        //    this.inputContentPl = inputContent;
 
-            starsCollection = dataContents ?? null;
+        //    planetCollection = dataContents ?? null;
 
-            contentFoundInFile = numOfContents ?? 0;
+        //    contentFoundInFile = numOfContents ?? 0;
 
-            hostname = inputContent.HostName;
-            discovMethod = inputContent.DiscoveryMethod;
-            discYear = uint.Parse(inputContent.DiscYear);
-            syDist = float.Parse(inputContent.SyDist);
+        //    hostname = inputContent.HostName;
+        //    discovMethod = inputContent.DiscoveryMethod;
+        //    discYear = uint.Parse(inputContent.DiscYear);
+        //    syDist = float.Parse(inputContent.SyDist);
 
-            starTemp = float.Parse(inputContent.StarTemperature);
-            starRadius = float.Parse(inputContent.StarRadius);
-            starMass = float.Parse(inputContent.StarMass);
-            starAge = float.Parse(inputContent.StarAge);
-            starVsin = float.Parse(inputContent.StarVsin);
-            starRotq = float.Parse(inputContent.StarRotq);
+        //    plName = inputContent.PlanetName;
+        //    plOrber = float.Parse(inputContent.PlanetOrbper);
+        //    plRadius = float.Parse(inputContent.Radius);
+        //    plMasse = float.Parse(inputContent.Masse);
+        //    plEqt = float.Parse(inputContent.PlanetEqt);
 
-            organizedContentsStars = new List<Stars>(contentFoundInFile);
-        }
+        //    organizedContentsPlanets = new List<Planet>(contentFoundInFile);  
+        //}
 
-        
+        //public HandleData(ICollection<Stars> dataContents, int? numOfContents,
+        //    InputContent inputContent)
+        //{
+        //    this.inputContent = inputContent;
+
+        //    starsCollection = dataContents ?? null;
+
+        //    contentFoundInFile = numOfContents ?? 0;
+
+        //    hostname = inputContent.HostName;
+        //    discovMethod = inputContent.DiscoveryMethod;
+        //    discYear = uint.Parse(inputContent.DiscYear);
+        //    syDist = float.Parse(inputContent.SyDist);
+
+        //    starTemp = float.Parse(inputContent.StarTemperature);
+        //    starRadius = float.Parse(inputContent.StarRadius);
+        //    starMass = float.Parse(inputContent.StarMass);
+        //    starAge = float.Parse(inputContent.StarAge);
+        //    starVsin = float.Parse(inputContent.StarVsin);
+        //    starRotq = float.Parse(inputContent.StarRotq);
+
+        //    organizedContentsStars = new List<Stars>(contentFoundInFile);
+        //}
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -135,12 +161,12 @@ namespace PlanetsDatabase
                  Contains(plName.ToLower())
                  where (content.PlanetOrbper).Equals(plOrber)
                  where (content.PlanetOrbper).Equals(plOrber)
-                 where (content.PlanetRadius).Equals(plRadius)
-                 where (content.PlanetMasse).Equals(plMasse)
+                 where (content.Radius).Equals(plRadius)
+                 where (content.Masse).Equals(plMasse)
                  where (content.PlanetEqt).Equals(plEqt)
 
                  select new Planet(content.PlanetName, content.PlanetOrbper,
-                 content.PlanetRadius, content.PlanetMasse, content.PlanetEqt,
+                 content.Radius, content.Masse, content.PlanetEqt,
                  content.HostName, content.DiscoveryMethod, content.DiscYear,
                  content.SyDist)).ToList();
 

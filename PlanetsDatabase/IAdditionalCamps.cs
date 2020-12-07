@@ -21,5 +21,9 @@
         /// Distance between sun and star
         /// </summary>
         public string SyDist { get; }
+
+        public string Radius { get; }
+
+        public string Masse { get; }
     }
 }
