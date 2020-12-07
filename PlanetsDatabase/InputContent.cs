@@ -11,7 +11,23 @@ namespace PlanetsDatabase
 
         public HandleData DatabaseContent;
 
-        public InputContent() { }
+        // Acess planet data
+        private Planet planet;
+
+        // List of plCamps
+        private List<Planet> plCamp;
+
+        /// <summary>
+        /// To get the input of the user
+        /// </summary>
+        public string readInput { get; set; }
+
+        public InputContent() 
+        {
+            planet = new Planet();
+
+            plCamp = new List<Planet>();
+        }
 
 
         public InputContent(AccessFile file)
@@ -19,14 +35,9 @@ namespace PlanetsDatabase
             this.file = file;
         }
 
-        /// <summary>
-        /// To get the input of the user
-        /// </summary>
-        public string readInput { get; set; }
+        
 
-        private Planet plCamp;
-
-        public void MainMenuInput()
+        public void MainMenuInput(AccessFile file)
         {
             try
             {
@@ -68,11 +79,11 @@ namespace PlanetsDatabase
         {
             readInput = Console.ReadLine().ToLower();
 
-            plCamp = new Planet(plCamp.PlanetName, plCamp.PlanetOrbper, 
-                plCamp.Radius, plCamp.Masse, plCamp.PlanetEqt, plCamp.HostName,
-                plCamp.DiscoveryMethod, plCamp.DiscYear, plCamp.SyDist);
+            plCamp.Add(new Planet(planet.PlanetName, planet.PlanetOrbper,
+                planet.Radius, planet.Masse, planet.PlanetEqt, planet.HostName,
+                planet.DiscoveryMethod, planet.DiscYear, planet.SyDist));
 
-            //DatabaseContent = new HandleData(Planet, File.list);
+            DatabaseContent = new HandleData(plCamp, file);
 
         }
 

@@ -34,10 +34,10 @@ namespace PlanetsDatabase
 
             file.AcessFile();
 
-            //printText.MainMenu();
+            printText.MainMenu();
 
             ////////////////////// SEND FILE TO INPUT CONTENT
-            ///inputCont.MainMenuInput(file);
+            inputCont.MainMenuInput(file);
         }
     }
 }

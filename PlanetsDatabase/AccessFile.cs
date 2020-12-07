@@ -32,7 +32,7 @@ namespace PlanetsDatabase
         public AccessFile() 
         {
             // Create instance of Planet List and Stars
-            contentCollPlanet = new List<Planet>();
+            
             contentCollStars = new List<Stars>();
         }
 
@@ -111,7 +111,9 @@ namespace PlanetsDatabase
         /// <param name="line"> Receive every line read in document </param>
         public void SplitContent(string[] sections)
         {
-            //inputContentCollPlanet = new List<Planet>();
+            int count = 0; 
+
+            contentCollPlanet = new List<Planet>(count);
 
             // Split Contents of the file and put each section
             // in a position of a strings array
@@ -144,6 +146,9 @@ namespace PlanetsDatabase
 
             contentCollPlanet.Add(new Planet(planetName, plOrber, plRade, 
                 plMasse, plEqt, hostName, discMethod, discYear, syDist));
+
+            handleData = new HandleData(contentCollPlanet,count, );
+            handleData.SetResultsPlanets();
 
             ////////////////////////// CREATE PLANET LIST OF ALL OF THESE (public)
 
