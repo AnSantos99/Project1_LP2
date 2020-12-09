@@ -24,75 +24,36 @@ namespace PlanetsDatabase
 
         private int SKIP_CONTENTS = 0;
 
+
+
         public void GetSections(List<Planet> contentList) 
         {
-            // To the content amount of planets
-            int contentLenght = contentList.Count();
+            List<Planet> newPlList = contentList.Take(MAX_CONTENTS).ToList();
 
-            int lenght = 0;
-
-            List<Planet> newPlList = new List<Planet>(MAX_CONTENTS);
-
-            newPlList = contentList.Take(MAX_CONTENTS).ToList();
-
-            int checkCondition;
-
-            while (lenght <= contentLenght)
+            if (newPlList.Count == MAX_CONTENTS)
             {
-                for (checkCondition = 0; checkCondition < 20; checkCondition++)
-                {
-                    Console.WriteLine($"{count}: " + 
-                        newPlList[checkCondition].ToString());
-                }
-
-                count++;
-
-                Console.WriteLine();
-                Console.WriteLine("Press 'n' to go to next page...");
-                Console.ReadKey();
-
-                newPlList.Clear();
-
-                newPlList = contentList.Skip(SKIP_CONTENTS).ToList();
-
-                SKIP_CONTENTS += MAX_CONTENTS;
-                lenght += MAX_CONTENTS;
-
-                Console.Clear();
+                //newPlList = contentList.Skip(0).ToList();
 
 
+                    foreach (Planet item in newPlList)
+                    {
+                        Console.WriteLine($"{count}:" + item.ToString());
+                        count++;
+
+                        if (count == MAX_CONTENTS)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Press 'n' to go to next page...");
+                            Console.ReadKey();
+                        }
+                    }
+
+                
+
+
+                //SKIP_CONTENTS += MAX_CONTENTS;
+                //count += MAX_CONTENTS;
             }
-
-
-
-
-
-
-            //if (contentList.Count == MAX_CONTENTS)
-            //{
-            //    foreach (Planet item in contentList)
-            //    {
-            //        Console.WriteLine($"{count}:" + item.ToString());
-            //        count++;
-
-            //        if (count == MAX_CONTENTS)
-            //        {
-            //            count = MAX_CONTENTS;
-
-            //            Console.WriteLine();
-            //            Console.WriteLine("Press 'n' to go to next page...");
-            //            if (Console.ReadKey().Key != ConsoleKey.N)
-            //            {
-            //                Console.WriteLine("Please press n to view next" +
-            //                    "content");
-            //            }
-            //            else
-            //            {
-
-            //            }
-            //        }
-            //    }
-            //}  
         }
 
 

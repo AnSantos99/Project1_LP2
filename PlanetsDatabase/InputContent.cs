@@ -76,16 +76,47 @@ namespace PlanetsDatabase
             }
         }
 
-        //public void UserInputPlanet()
-        //{
-        //    readInput = Console.ReadLine().ToLower();
+        public void UserInputPlanet(List<Planet> plList)
+        {
 
-        //    plCamp.Add(new Planet(planet.PlanetName, planet.PlanetOrbper,
-        //        planet.Radius, planet.Masse, planet.PlanetEqt, planet.HostName,
-        //        planet.DiscoveryMethod, planet.DiscYear, planet.SyDist));
+            //Console.WriteLine("1.PL_Name, 2.PL_orber");
 
-        //    //DatabaseContent = new HandleData(plCamp, file);
-        //}
+            //readInput = Console.ReadLine();
+            //if (readInput == "1.")
+            //{
+            //    readInput.
+            //    readInput = planet.PlanetName;
+            //}
+            
+
+            //if (planet.PlanetName.Contains(readInput))
+            //{
+            //    plList.Add(new Planet(planet.PlanetName));
+            //}
+
+
+
+            readInput = Console.ReadLine().ToLower();
+
+            // Compare input with list content
+            
+
+            // if match, print out the compared input (maybe insert here
+            // the method in handle data or ao contrario
+
+            // ignore the rest of the camps
+
+            // Ask user if he wants to know more information about a content
+            // to pick up the number of the object
+
+
+
+            plCamp.Add(new Planet(planet.PlanetName, planet.PlanetOrbper,
+                planet.Radius, planet.Masse, planet.PlanetEqt, planet.HostName,
+                planet.DiscoveryMethod, planet.DiscYear, planet.SyDist));
+
+            //DatabaseContent = new HandleData(plCamp, file);
+        }
 
     }
 }

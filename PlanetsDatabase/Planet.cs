@@ -80,7 +80,9 @@ namespace PlanetsDatabase
 
         public override string ToString()
         {
-            return $"{PlanetName} | {PlanetOrbper} | {Radius} | {Masse} | {PlanetEqt} | {HostName} | {DiscoveryMethod} | {DiscYear} | {SyDist}";
+            return $"{PlanetName} | {PlanetOrbper} | {Radius} | {Masse} | " +
+                $"{PlanetEqt} | {HostName} | {DiscoveryMethod} | {DiscYear} | " +
+                $"{SyDist}";
         }
 
         public Planet() { }

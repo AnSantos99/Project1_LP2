@@ -22,7 +22,7 @@ namespace PlanetsDatabase
 
         public List<Planet> contentCollPlanet;
 
-        private Planet camp;
+        private Planet plCamp;
 
         public ICollection<Stars> contentCollStars;
 
@@ -36,7 +36,7 @@ namespace PlanetsDatabase
             contentCollStars = new List<Stars>();
             contentCollPlanet = new List<Planet>();
 
-            camp = new Planet();
+            plCamp = new Planet();
             handleData = new HandleData();
         }
 
@@ -70,6 +70,8 @@ namespace PlanetsDatabase
             {
                 Console.WriteLine($"File could not be found in {path}.");
             }
+
+            
         }
 
         /// <summary>
@@ -109,106 +111,50 @@ namespace PlanetsDatabase
         }
 
         
-
+        /// <summary>
+        /// Content spliter to each sections
+        /// </summary>
+        /// <param name="sections"></param>
         public void SplitSections(string[] sections)
         {
-            camp.PlanetName = 
+            plCamp.PlanetName = 
                 ((sections[0]) != "") ? sections[0] : "N/A";
 
-            camp.HostName = 
+            plCamp.HostName = 
                 ((sections[1]) != "") ? sections[1] : "N/A";
 
-            camp.DiscoveryMethod = 
+            plCamp.DiscoveryMethod = 
                 ((sections[5]) != "") ? sections[5] : "N/A";
 
-            camp.DiscYear = 
+            plCamp.DiscYear = 
                 ((sections[6]) != "") ? sections[6] : "N/A";
 
-            camp.PlanetOrbper = 
+            plCamp.PlanetOrbper = 
                 ((sections[11]) != "") ? sections[11] : "N/A";
 
-            camp.Radius = 
+            plCamp.Radius = 
                 ((sections[13]) != "") ? sections[13] : "N/A";
 
-            camp.Masse = 
+            plCamp.Masse = 
                 ((sections[15]) != "") ? sections[15] : "N/A";
 
-            camp.PlanetEqt = 
+            plCamp.PlanetEqt = 
                 ((sections[20]) != "") ? sections[20] : "-";
 
-            camp.SyDist = 
+            plCamp.SyDist = 
                 ((sections[34]) != "") ? sections[34] : "-";
 
-            // Add content to list of planets
-            contentCollPlanet.Add(new Planet(camp.PlanetName, 
-                camp.PlanetOrbper, camp.Radius, camp.Masse, camp.PlanetEqt, 
-                camp.HostName, camp.DiscoveryMethod, camp.DiscYear, 
-                camp.SyDist));
+            // Cannot forget to add star camps
 
-            
+            // Add content to list of planets
+            contentCollPlanet.Add(new Planet(plCamp.PlanetName,
+                plCamp.PlanetOrbper, plCamp.Radius, plCamp.Masse, plCamp.PlanetEqt,
+                plCamp.HostName, plCamp.DiscoveryMethod, plCamp.DiscYear,
+                plCamp.SyDist));
+
+
             handleData.GetSections(contentCollPlanet);
         }
-
-
-        /////////////// <summary>
-        /////////////// Organizes the content to its specific section and creates a list
-        /////////////// of planets and stars to save its sections into it
-        /////////////// </summary>
-        /////////////// <param name="sections"> receives the array of strings that has
-        /////////////// the content of the file </param>
-        ////////////public void SplitSections(string[] sections)
-        ////////////{
-        ////////////    // For counting contents
-
-        ////////////    // Instance of list of planets
-
-
-        ////////////    // Organization of section by giving a name of each section and its
-        ////////////    // contents fot planets and stars and asking if there is any type
-        ////////////    // of information. Returns information if true and N/A or '-' if
-        ////////////    // thats not the case
-        ////////////    string planetName = ((sections[0]) != "") ? sections[0] : "N/A";
-        ////////////    string hostName = ((sections[1]) != "") ? sections[1] : "N/A";
-        ////////////    string discMethod = ((sections[5]) != "") ? sections[5] : "N/A";
-        ////////////    string discYear = ((sections[6]) != "") ? sections[6] : "N/A";
-
-        ////////////    string plOrber = ((sections[11]) != "") ? sections[11] : "N/A";
-        ////////////    string plRade = ((sections[13]) != "") ? sections[13] : "N/A";
-        ////////////    string plMasse = ((sections[15]) != "") ? sections[15] : "N/A";
-        ////////////    string plEqt = ((sections[20]) != "") ? sections[20] : "-";
-        ////////////    string syDist = ((sections[34]) != "") ? sections[34] : "-";
-
-        ////////////    string stTeff = ((sections[23]) != "") ? sections[23] : "-";
-        ////////////    string stRad = ((sections[24]) != "") ? sections[24] : "-";
-        ////////////    string stMass = ((sections[25]) != "") ? sections[25] : "-";
-
-        ////////////    //string stAge = ((sections[34]) != "") ? sections[34] : "-";
-        ////////////    //string stVsin = ((sections[34]) != "") ? sections[34] : "-";
-        ////////////    //string stRotq = ((sections[34]) != "") ? sections[34] : "-";
-
-
-        ////////////    //For testing to print out all contents saved in those variables
-        ////////////    //Console.WriteLine($"{planetName}\t{hostName}\t{discMethod}\t" +
-        ////////////    //$"{discYear}\t{plOrber}\t{plRade}\t{plMasse}\t{plEqt}\t" +
-        ////////////    //$"{syDist}\t{stTeff}\t{stRad}\t{stMass}");
-
-        ////////////    // Add content to list of planets
-        ////////////    contentCollPlanet.Add(new Planet(planetName, plOrber, plRade,
-        ////////////        plMasse, plEqt, hostName, discMethod, discYear, syDist));
-
-        ////////////    foreach (var item in contentCollPlanet)
-        ////////////    {
-        ////////////        Console.WriteLine(item);
-        ////////////    }
-
-        ////////////    //handleData.GetSections(new List<Planet>(contentCollPlanet));
-
-
-        ////////////    //handleData = new HandleData(contentCollPlanet, count, null);
-        ////////////    //handleData.SetResultsPlanets();
-
-        ////////////    ////////////////////////// CREATE PLANET LIST OF ALL OF THESE (public)
-        ////////////}
 
 
         /* ----- Verification methods ----- */

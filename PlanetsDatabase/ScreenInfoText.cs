@@ -39,6 +39,13 @@ namespace PlanetsDatabase
                 "");
         }
 
+        public void ContentMenuMenu() 
+        {
+            Console.WriteLine(
+                "Press 'Enter' to go back to main Menu.\n" +
+                "Press 'Q' To exit from the application.");
+        }
+
         public void PlanetName() 
         {
             Console.WriteLine("Name a planet: ");

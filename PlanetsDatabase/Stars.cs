@@ -69,7 +69,8 @@ namespace PlanetsDatabase
         /// <param name="starVsin"></param>
         /// <param name="starRotq"></param>
         public Stars(string starTemperatur, string starRadius, string starMass,
-            string starAge, string starVsin, string starRotq) 
+            string starAge, string starVsin, string starRotq, string hostName,
+            string disYear, string discMethtod, string syDist) 
         {
             StarTemperature = starTemperatur;
             Radius = starRadius;
@@ -77,6 +78,17 @@ namespace PlanetsDatabase
             StarAge = starAge;
             StarVsin = starVsin;
             StarRotq = starRotq;
+            HostName = hostName;
+            DiscYear = disYear;
+            DiscoveryMethod = discMethtod;
+            SyDist = syDist;
+        }
+
+        public override string ToString()
+        {
+            return $"{StarTemperature} | {Radius} | {Masse} | {StarAge} | " +
+                $"{StarVsin} | {StarRotq} | {HostName} | {DiscoveryMethod} | " +
+                $"{DiscYear} | {SyDist}";
         }
     }
 }
