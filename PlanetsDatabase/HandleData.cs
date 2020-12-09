@@ -1,297 +1,283 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
 using System.Linq;
 
 namespace PlanetsDatabase
 {
     /// <summary>
-    /// To handle the data into its specific place
+    /// Contains the content of all contents the program found related to the
+    /// users input.
     /// </summary>
     class HandleData
     {
+        private InputContent userInput;
+
+        private ConsoleKey nextPageKey = ConsoleKey.N;
+
+        // To count elements in collection
+        private int count = 1;
+
+        // Max element that can be shown from collection on display
+        private const int MAX_CONTENTS = 20;
+
+        private int SKIP_CONTENTS = 0;
+
+        public void GetSections(List<Planet> contentList) 
+        {
+            // To the content amount of planets
+            int contentLenght = contentList.Count();
+
+            int lenght = 0;
+
+            List<Planet> newPlList = new List<Planet>(MAX_CONTENTS);
+
+            newPlList = contentList.Take(MAX_CONTENTS).ToList();
+
+            int checkCondition;
+
+            while (lenght <= contentLenght)
+            {
+                for (checkCondition = 0; checkCondition < 20; checkCondition++)
+                {
+                    Console.WriteLine($"{count}: " + 
+                        newPlList[checkCondition].ToString());
+                }
+
+                count++;
+
+                Console.WriteLine();
+                Console.WriteLine("Press 'n' to go to next page...");
+                Console.ReadKey();
+
+                newPlList.Clear();
+
+                newPlList = contentList.Skip(SKIP_CONTENTS).ToList();
+
+                SKIP_CONTENTS += MAX_CONTENTS;
+                lenght += MAX_CONTENTS;
+
+                Console.Clear();
+
+
+            }
+
+
+
+
+
+
+            //if (contentList.Count == MAX_CONTENTS)
+            //{
+            //    foreach (Planet item in contentList)
+            //    {
+            //        Console.WriteLine($"{count}:" + item.ToString());
+            //        count++;
+
+            //        if (count == MAX_CONTENTS)
+            //        {
+            //            count = MAX_CONTENTS;
+
+            //            Console.WriteLine();
+            //            Console.WriteLine("Press 'n' to go to next page...");
+            //            if (Console.ReadKey().Key != ConsoleKey.N)
+            //            {
+            //                Console.WriteLine("Please press n to view next" +
+            //                    "content");
+            //            }
+            //            else
+            //            {
+
+            //            }
+            //        }
+            //    }
+            //}  
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /// <summary>
         /// To store all camps for planets
         /// </summary>
         private ICollection<Planet> planetCollection;
 
-        /// <summary>
-        /// To store all camps that belong to the stars
-        /// </summary>
-        private ICollection<Stars> starsCollection;
-
         // Maximum contents that can be showed on the screen
         private const int LINES_TO_DISPLAY_ON_SCREEN = 20;
 
-        // Number of content found in file
+        // Number of content found in file to tell user how many were found
         private int contentFoundInFile;
 
         // Save input from user
-        private Planet inputContentPl;
+        //private Planet inputContentPl;
 
-        // Variables to store each camp input
-        private string hostname;
-        private string discovMethod;
-        private string discYear;
-        private string syDist;
+        // Variables to store each camp to compare with the lists content
+        private string searchedHostname;
+        private string searchedDiscovMethod;
+        private string searchedDiscYear;
+        private string searchedSyDist;
 
-        private string plName;
-        private string plOrber;
-        private string plRadius;
-        private string plMasse;
-        private string plEqt;
+        private string searchedPlName;
+        private string searchedPlOrber;
+        private string searchedPlRadius;
+        private string searchedPlMasse;
+        private string searchedPlEqt;
 
-        private string starTemp;
-        private string starRadius;
-        private string starMass;
-        private string starAge;
-        private string starVsin;
-        private string starRotq;
+        //private string starTemp;
+        //private string starRadius;
+        //private string starMass;
+        //private string starAge;
+        //private string starVsin;
+        //private string starRotq;
 
-        private List<Planet> organizedContentsPlanets;
-        private List<Stars> organizedContentsStars;
+        public Planet searchedItem;
 
-        public HandleData(List<Planet> dataContents, AccessFile file)
-        {
-            Planet inputContent = new Planet();
+        private ICollection<Planet> organizedPlContent;
 
-            int? numOfContents = 0;
+        public HandleData() 
+        { }
 
-            this.inputContentPl = inputContent;
-
-            planetCollection = dataContents ?? null;
-
-            contentFoundInFile = numOfContents ?? 0;
-
-            hostname = inputContent.HostName;
-            discovMethod = inputContent.DiscoveryMethod;
-            discYear = inputContent.DiscYear;
-            syDist = inputContent.SyDist;
-
-            plName = inputContent.PlanetName;
-            plOrber = inputContent.PlanetOrbper;
-            plRadius = inputContent.Radius;
-            plMasse = inputContent.Masse;
-            plEqt = inputContent.PlanetEqt;
-
-            organizedContentsPlanets = new List<Planet>(contentFoundInFile);
-        }
-
-        public HandleData(ICollection<Planet> dataContents, int? numOfContents,
-            Planet inputContent)
-        {
-            this.inputContentPl = inputContent;
-
-            planetCollection = dataContents ?? null;
-
-            contentFoundInFile = numOfContents ?? 0;
-
-            hostname = inputContent.HostName;
-            discovMethod = inputContent.DiscoveryMethod;
-            discYear = inputContent.DiscYear;
-            syDist = inputContent.SyDist;
-
-            plName = inputContent.PlanetName;
-            plOrber = inputContent.PlanetOrbper;
-            plRadius = inputContent.Radius;
-            plMasse = inputContent.Masse;
-            plEqt = inputContent.PlanetEqt;
-
-            organizedContentsPlanets = new List<Planet>(contentFoundInFile);
-        }
-
-        //public HandleData(ICollection<Stars> dataContents, int? numOfContents,
-        //    InputContent inputContent)
+        //public void CompareContents(ICollection<Planet> plContentinFile, 
+        //   int? numContentFound) 
         //{
-        //    this.inputContent = inputContent;
+        //   Planet searchedItem;
 
-        //    starsCollection = dataContents ?? null;
+        //   this.searchedItem = searchedItem;
 
-        //    contentFoundInFile = numOfContents ?? 0;
+        //   planetCollection = plContentinFile ?? null;
+        //   contentFoundInFile = numContentFound ?? 0;
 
-        //    hostname = inputContent.HostName;
-        //    discovMethod = inputContent.DiscoveryMethod;
-        //    discYear = uint.Parse(inputContent.DiscYear);
-        //    syDist = float.Parse(inputContent.SyDist);
+        //   searchedPlName = searchedItem.PlanetName;
+        //   searchedPlOrber = searchedItem.PlanetOrbper;
+        //   searchedPlRadius = searchedItem.Radius;
+        //   searchedPlMasse = searchedItem.Masse;
+        //   searchedPlEqt = searchedItem.PlanetEqt;
 
-        //    starTemp = float.Parse(inputContent.StarTemperature);
-        //    starRadius = float.Parse(inputContent.StarRadius);
-        //    starMass = float.Parse(inputContent.StarMass);
-        //    starAge = float.Parse(inputContent.StarAge);
-        //    starVsin = float.Parse(inputContent.StarVsin);
-        //    starRotq = float.Parse(inputContent.StarRotq);
-
-        //    organizedContentsStars = new List<Stars>(contentFoundInFile);
+        //   organizedPlContent = new List<Planet>(contentFoundInFile);
         //}
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void SetResultsPlanets()
+        public HandleData(ICollection<Planet> plContents) 
         {
-            Console.WriteLine(hostname);
-            Console.WriteLine(discovMethod);
-            Console.WriteLine(discYear);
-            Console.WriteLine(syDist);
-
-            Console.WriteLine(plName);
-            Console.WriteLine(plOrber);
-            Console.WriteLine(plRadius);
-            Console.WriteLine(plMasse);
-            Console.WriteLine(plEqt);
-
-            Console.WriteLine(starTemp);
-            Console.WriteLine(starRadius);
-            Console.WriteLine(starMass);
-            Console.WriteLine(starAge);
-            Console.WriteLine(starVsin);
-            Console.WriteLine(starRotq);
-
-            organizedContentsPlanets =
-                (from content in planetCollection
-                 where (content.HostName).ToLower().
-                 Contains(hostname.ToLower())
-                 where (content.DiscoveryMethod).ToLower().
-                 Contains(discovMethod.ToLower())
-                 where (content.DiscYear.Equals(discYear))
-                 where (content.SyDist).Equals(syDist)
-
-                 where (content.PlanetName).ToLower().
-                 Contains(plName.ToLower())
-                 where (content.PlanetOrbper).Equals(plOrber)
-                 where (content.PlanetOrbper).Equals(plOrber)
-                 where (content.Radius).Equals(plRadius)
-                 where (content.Masse).Equals(plMasse)
-                 where (content.PlanetEqt).Equals(plEqt)
-
-                 select new Planet(content.PlanetName, content.PlanetOrbper,
-                 content.Radius, content.Masse, content.PlanetEqt,
-                 content.HostName, content.DiscoveryMethod, content.DiscYear,
-                 content.SyDist)).ToList();
-
-            PageContents(organizedContentsPlanets);
-            planetCollection.Clear();
-        }
-
-        public void PageContents(List<Planet> content)
-        {
-            // To check length of the organized titles
-            uint lenghtCheck = 0;
-
-            // Count amount of titles
-            int length = organizedContentsPlanets.Count();
-
-            // this initialises the variable for the skip value
-            int skipValue = 0;
-
-            // Loop checker declared outside for loop to have acess to it 
-            // on while condition
-            int conditionChecker = 0;
-
-            int counter = 1;
-
-            // Take x amount of content and save it to a new list
-            List<Planet> newList = new List<Planet>(contentFoundInFile);
-
-            newList = organizedContentsPlanets.Take(contentFoundInFile).ToList();
-
-            Console.WriteLine("We found" + length + "Matching your search!");
-
-            Console.WriteLine("Pl_name | Pl_Orber | PL_Radius | Pl_Masse | " +
-                "Pl_Eqt | HostName | Discoverymethod | Disc. Year | SyDist");
-
-            // Stay true while the lenghtChecker is smaller or equals the
-            // amount of titles
-            while (lenghtCheck <= length)
-            {
-                for (conditionChecker = 0; conditionChecker < 30;
-                    conditionChecker++)
-                {
-                    Console.Write(counter);
-                    Console.Write(newList[conditionChecker].PlanetName);
-                    Console.Write(" | ");
-                    Console.Write(newList[conditionChecker].PlanetOrbper);
-                    Console.Write(" | ");
-                    Console.Write(newList[conditionChecker].Radius?.ToString());
-                    Console.Write(" | ");
-                    Console.Write(newList[conditionChecker].Masse?.ToString());
-                    Console.Write(" | ");
-                    Console.Write(newList[conditionChecker].PlanetEqt?.ToString());
-                    Console.Write(" | ");
-                    Console.Write(newList[conditionChecker].HostName);
-                    Console.Write(" | ");
-                    Console.Write(newList[conditionChecker].DiscoveryMethod);
-                    Console.Write(" | ");
-                    Console.Write(newList[conditionChecker].DiscYear);
-                    Console.Write(" | ");
-                    Console.Write(newList[conditionChecker].SyDist);
-                    Console.WriteLine();
-                }
-                counter++;
-            }
-            DisplayChosenTitle(newList, 4);
-
-            // reset value so next loop starts at 0
-            conditionChecker = 0;
-
-            // Ask user if he wants to see the next contents
-            Console.WriteLine();
-            Console.WriteLine("Press enter to see more.");
-            Console.ReadKey();
-
-            // Clear old list to save memory
-            newList.Clear();
-
-            // Create a new list but skip the already shown
-            newList = organizedContentsPlanets.Skip(skipValue).ToList();
-
-            // increase the value to allow access to the list's next results
-            skipValue += LINES_TO_DISPLAY_ON_SCREEN;
-
-            // add 30 each time to stop loop after last value is written
-            lenghtCheck += LINES_TO_DISPLAY_ON_SCREEN;
-
-            Console.Clear();
+            
         }
 
         /// <summary>
-        /// bugged placeholder to give user info from chosen title in list
+        /// This method is for comparing the input with the lists content
         /// </summary>
-        /// <param name="currentSkipValue"></param>
-        /// <param name="UserValue"></param>
-        public void DisplayChosenTitle(List<Planet> newList, int UserValue)
-        {
-            // later - add condition for person to choose item
-            // placeholder - test chosen item to display info
+        /// <param name="dataContents"></param>
+        /// <param name="inputContent"></param>
+        ////////public HandleData(ICollection<Planet> dataContents, )
+        ////////{
+        ////////    InputContent inputContentPl = new InputContent();
 
-            int indexOfTitle = UserValue - 1;
-            Console.WriteLine("Info from number" /*+ count*/);
+        ////////    inputContentPl = inputContent;
 
-            Console.WriteLine("Number: " + newList[indexOfTitle].PlanetName + UserValue);
-            //etc
+        ////////    planetCollection = dataContents ?? null;
 
-            // later when title info display is in separate place to show better
+        ////////    contentFoundInFile = numOfContents ?? 0;
 
+        ////////    hostname = inputContent.HostName;
+        ////////    discovMethod = inputContent.DiscoveryMethod;
+        ////////    discYear = inputContent.DiscYear;
+        ////////    syDist = inputContent.SyDist;
 
-        }
+        ////////    plName = inputContent.PlanetName;
+        ////////    plOrber = inputContent.PlanetOrbper;
+        ////////    plRadius = inputContent.Radius;
+        ////////    plMasse = inputContent.Masse;
+        ////////    plEqt = inputContent.PlanetEqt;
 
-        /// <summary>
-        /// Sort the list by the planets name
-        /// </summary>
-        /// <param name="pl"></param>
-        public void SortList(List<Planet> pl)
-        {
-            pl.OrderByDescending(name => name.PlanetName);
-        }
+        ////////    organizedContentsPlanets = new List<Planet>(contentFoundInFile);
+        ////////}
 
-        /// <summary>
-        /// Sort the list by the planets name
-        /// </summary>
-        /// <param name="pl"></param>
-        public void SortList(List<Stars> st)
-        {
-            st.OrderByDescending(name => name.HostName);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public void SetResultsPlanets()
+        //{
+        //    Console.WriteLine(hostname);
+        //    Console.WriteLine(discovMethod);
+        //    Console.WriteLine(discYear);
+        //    Console.WriteLine(syDist);
+
+        //    Console.WriteLine(plName);
+        //    Console.WriteLine(plOrber);
+        //    Console.WriteLine(plRadius);
+        //    Console.WriteLine(plMasse);
+        //    Console.WriteLine(plEqt);
+
+        //    //Console.WriteLine(starTemp);
+        //    //Console.WriteLine(starRadius);
+        //    //Console.WriteLine(starMass);
+        //    //Console.WriteLine(starAge);
+        //    //Console.WriteLine(starVsin);
+        //    //Console.WriteLine(starRotq);
+
+        //    organizedContentsPlanets =
+        //        (from content in planetCollection
+        //         where (content.HostName).ToLower().
+        //         Contains(hostname.ToLower())
+        //         where (content.DiscoveryMethod).ToLower().
+        //         Contains(discovMethod.ToLower())
+        //         where (content.DiscYear.Equals(discYear))
+        //         where (content.SyDist).Equals(syDist)
+
+        //         where (content.PlanetName).ToLower().
+        //         Contains(plName.ToLower())
+        //         where (content.PlanetOrbper).Equals(plOrber)
+        //         where (content.PlanetOrbper).Equals(plOrber)
+        //         where (content.Radius).Equals(plRadius)
+        //         where (content.Masse).Equals(plMasse)
+        //         where (content.PlanetEqt).Equals(plEqt)
+
+        //         select new Planet(content.PlanetName, content.PlanetOrbper,
+        //         content.Radius, content.Masse, content.PlanetEqt,
+        //         content.HostName, content.DiscoveryMethod, content.DiscYear,
+        //         content.SyDist)).ToList();
+
+        //    PageContents(organizedContentsPlanets);
+        //    planetCollection.Clear();
+        //}
     }
 }

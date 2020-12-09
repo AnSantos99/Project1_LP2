@@ -48,7 +48,7 @@ namespace PlanetsDatabase
                     case "1":
                         Console.WriteLine("Planets Info");
                         Console.WriteLine("Write down name:");
-                        UserInputPlanet();
+                        //UserInputPlanet();
                         //DatabaseContent = new HandleData(file.ListOfContent, input);
                         //DatabaseContent.SetResults();
 
@@ -59,7 +59,8 @@ namespace PlanetsDatabase
                         break;
 
                     case "q":
-                        Console.WriteLine("Thank you");
+                        Console.WriteLine("Exiting application.\n" +
+                            "Thank you for your time!");
                         Thread.Sleep(3000);
                         Environment.Exit(0);
                         break;
@@ -75,17 +76,16 @@ namespace PlanetsDatabase
             }
         }
 
-        public void UserInputPlanet()
-        {
-            readInput = Console.ReadLine().ToLower();
+        //public void UserInputPlanet()
+        //{
+        //    readInput = Console.ReadLine().ToLower();
 
-            plCamp.Add(new Planet(planet.PlanetName, planet.PlanetOrbper,
-                planet.Radius, planet.Masse, planet.PlanetEqt, planet.HostName,
-                planet.DiscoveryMethod, planet.DiscYear, planet.SyDist));
+        //    plCamp.Add(new Planet(planet.PlanetName, planet.PlanetOrbper,
+        //        planet.Radius, planet.Masse, planet.PlanetEqt, planet.HostName,
+        //        planet.DiscoveryMethod, planet.DiscYear, planet.SyDist));
 
-            DatabaseContent = new HandleData(plCamp, file);
-
-        }
+        //    //DatabaseContent = new HandleData(plCamp, file);
+        //}
 
     }
 }

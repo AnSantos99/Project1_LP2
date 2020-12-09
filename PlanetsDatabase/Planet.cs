@@ -78,7 +78,11 @@ namespace PlanetsDatabase
             SyDist = syDist;
         }
 
-        public Planet() { }
+        public override string ToString()
+        {
+            return $"{PlanetName} | {PlanetOrbper} | {Radius} | {Masse} | {PlanetEqt} | {HostName} | {DiscoveryMethod} | {DiscYear} | {SyDist}";
+        }
 
+        public Planet() { }
     }
 }

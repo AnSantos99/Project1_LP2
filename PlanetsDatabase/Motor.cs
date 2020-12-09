@@ -32,12 +32,12 @@ namespace PlanetsDatabase
         {
             printText.IntroMenu();
 
-            file.AcessFile();
+            file.AccessTheFile();
 
-            printText.MainMenu();
+            //printText.MainMenu();
 
             ////////////////////// SEND FILE TO INPUT CONTENT
-            inputCont.MainMenuInput(file);
+            //inputCont.MainMenuInput(file);
         }
     }
 }
