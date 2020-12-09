@@ -34,9 +34,11 @@ namespace PlanetsDatabase
         {
             // Create instance of Planet List and Stars
             contentCollStars = new List<Stars>();
+
             contentCollPlanet = new List<Planet>();
 
             plCamp = new Planet();
+
             handleData = new HandleData();
         }
 
@@ -57,7 +59,9 @@ namespace PlanetsDatabase
                 
             try
             { 
-                using (FileStream fs = new FileStream(
+                using (
+                    
+                    FileStream fs = new FileStream(
                 path, FileMode.Open, FileAccess.Read))
                 {
                     using (StreamReader sr = new StreamReader(fs))
@@ -97,6 +101,8 @@ namespace PlanetsDatabase
                     SplitContent(line);
                 }
             }
+            handleData.GetSections(contentCollPlanet);
+
         }
 
         /// <summary>
@@ -153,7 +159,8 @@ namespace PlanetsDatabase
                 plCamp.SyDist));
 
 
-            handleData.GetSections(contentCollPlanet);
+            //handleData.GetSections(contentCollPlanet);
+
         }
 
 
