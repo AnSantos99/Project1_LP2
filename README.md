@@ -31,9 +31,9 @@ On the Menu, the user will be asked if they want information on the Stars or the
 
 ### Flowchart and UML
 
-![Flowchart](/Images/Flowchart.png)
+![Flowchart](Flowchart.png)
 
-![UML](/Images/UML.png)
+![UML](UML.png)
 
 ## References
 
