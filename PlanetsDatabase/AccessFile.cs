@@ -20,24 +20,37 @@ namespace PlanetsDatabase
         /// </summary>
         public string fileToOpen;
 
+        /// <summary>
+        /// List that saves the content of the Planets in a list
+        /// </summary>
         public List<Planet> contentCollPlanet;
 
+        /// <summary>
+        /// To access the planets properties
+        /// </summary>
         private Planet plCamp;
 
-        public ICollection<Stars> contentCollStars;
+        /// <summary>
+        /// List that saves the content of the Stars in a list
+        /// </summary>
+        public List<Stars> contentCollStars;
+
+        /// <summary>
+        /// To access the planets properties
+        /// </summary>
+        private Stars stCamp;
 
         public HandleData handleData;
 
-        private InputContent inputContent;
-
         public AccessFile() 
         {
-            // Create instance of Planet List and Stars
-            contentCollStars = new List<Stars>();
-
             contentCollPlanet = new List<Planet>();
 
             plCamp = new Planet();
+
+            contentCollStars = new List<Stars>();
+
+            stCamp = new Stars();
 
             handleData = new HandleData();
         }
@@ -56,12 +69,12 @@ namespace PlanetsDatabase
             // Specified path to open the file
             path = Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.Desktop), fileToOpen);
+
+            // Try to execute aka to open the specific file and its content
             try
             { 
-                using (
-                    
-                    FileStream fs = new FileStream(
-                path, FileMode.Open, FileAccess.Read))
+                using (FileStream fs = new FileStream(
+                    path, FileMode.Open, FileAccess.Read))
                 {
                     using (StreamReader sr = new StreamReader(fs))
                     {
@@ -69,12 +82,11 @@ namespace PlanetsDatabase
                     }  
                 }  
             }
+            // Throw exception if file could not be found
             catch (FileNotFoundException)
             {
                 Console.WriteLine($"File could not be found in {path}.");
-            }
-
-            
+            } 
         }
 
         /// <summary>
@@ -97,11 +109,10 @@ namespace PlanetsDatabase
 
                 else
                 {
+                    // Split the contents from all lines
                     SplitContent(line);
                 }
             }
-            //handleData.GetPlanetItems(contentCollPlanet);
-
         }
 
         /// <summary>
@@ -129,27 +140,25 @@ namespace PlanetsDatabase
                 ((sections[1]) != "") ? sections[1] : "N/A";
 
             plCamp.DiscoveryMethod = 
-                ((sections[5]) != "") ? sections[5] : "N/A";
-
-            plCamp.DiscYear = 
-                ((sections[6]) != "") ? sections[6] : "N/A";
-
-            plCamp.PlanetOrbper = 
                 ((sections[11]) != "") ? sections[11] : "N/A";
 
+            plCamp.DiscYear = 
+                ((sections[12]) != "") ? sections[12] : "N/A";
+
+            plCamp.PlanetOrbper = 
+                ((sections[30]) != "") ? sections[30] : "N/A";
+
             plCamp.Radius = 
-                ((sections[13]) != "") ? sections[13] : "N/A";
+                ((sections[34]) != "") ? sections[34] : "N/A";
 
             plCamp.Masse = 
-                ((sections[15]) != "") ? sections[15] : "N/A";
+                ((sections[38]) != "") ? sections[38] : "N/A";
 
             plCamp.PlanetEqt = 
-                ((sections[20]) != "") ? sections[20] : "-";
+                ((sections[49]) != "") ? sections[49] : "-";
 
             plCamp.SyDist = 
-                ((sections[34]) != "") ? sections[34] : "-";
-
-            // Cannot forget to add star camps
+                ((sections[118]) != "") ? sections[118] : "-";
 
             // Add content to list of planets
             contentCollPlanet.Add(new Planet(plCamp.PlanetName,
@@ -157,13 +166,50 @@ namespace PlanetsDatabase
                 plCamp.HostName, plCamp.DiscoveryMethod, plCamp.DiscYear,
                 plCamp.SyDist));
 
+            // Cannot forget to add star camps
 
-            //handleData.GetSections(contentCollPlanet);
+            stCamp.SyDist =
+                ((sections[118]) != "") ? sections[118] : "-";
 
+            stCamp.DiscoveryMethod =
+                ((sections[11]) != "") ? sections[11] : "-";
+
+            stCamp.DiscYear =
+                ((sections[12]) != "") ? sections[12] : "-";
+
+            stCamp.HostName =
+                ((sections[1]) != "") ? sections[1] : "-";
+
+            stCamp.StarRotq =
+                ((sections[101]) != "") ? sections[101] : "-";
+
+            stCamp.StarVsin =
+                ((sections[99]) != "") ? sections[99] : "-";
+
+            stCamp.StarAge =
+                ((sections[95]) != "") ? sections[95] : "-";
+
+            stCamp.Masse =
+                ((sections[86]) != "") ? sections[86] : "-";
+
+            stCamp.Radius =
+                ((sections[84]) != "") ? sections[84] : "-";
+
+            stCamp.StarTemperature =
+                ((sections[23]) != "") ? sections[23] : "-";
+
+            // Add content to list of planets
+            contentCollStars.Add(new Stars(stCamp.StarTemperature, 
+                stCamp.Radius, stCamp.Masse, stCamp.StarAge, stCamp.StarVsin, 
+                stCamp.StarRotq, stCamp.HostName, stCamp.DiscYear, 
+                stCamp.DiscoveryMethod, stCamp.SyDist));
         }
 
 
-        /* ----- Verification methods ----- */
+        /* ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+         * ----------------------Verification methods--------------------------
+         * ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+         */
 
         /// <summary>
         /// Checks the files ending. If it's not .csv

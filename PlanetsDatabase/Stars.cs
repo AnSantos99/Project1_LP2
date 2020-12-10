@@ -60,14 +60,14 @@ namespace PlanetsDatabase
         public string SyDist { get; set; }
 
         /// <summary>
-        /// 
+        /// To invoke
         /// </summary>
-        /// <param name="starTemperatur"></param>
-        /// <param name="starRadius"></param>
-        /// <param name="starMass"></param>
-        /// <param name="starAge"></param>
-        /// <param name="starVsin"></param>
-        /// <param name="starRotq"></param>
+        /// <param name="starTemperatur"> Get stars temperature camp</param>
+        /// <param name="starRadius"> Get radius camp </param>
+        /// <param name="starMass"> Get Mass camp </param>
+        /// <param name="starAge"> Get age camp </param>
+        /// <param name="starVsin"> Get starvsin camp </param>
+        /// <param name="starRotq"> Get star rotq camp </param>
         public Stars(string starTemperatur, string starRadius, string starMass,
             string starAge, string starVsin, string starRotq, string hostName,
             string disYear, string discMethtod, string syDist) 
@@ -84,6 +84,15 @@ namespace PlanetsDatabase
             SyDist = syDist;
         }
 
+        /// <summary>
+        /// Empty Stars Constructor
+        /// </summary>
+        public Stars() {}
+
+        /// <summary>
+        /// Override of to string to print out results
+        /// </summary>
+        /// <returns> content of list </returns>
         public override string ToString()
         {
             return $"{StarTemperature} | {Radius} | {Masse} | {StarAge} | " +

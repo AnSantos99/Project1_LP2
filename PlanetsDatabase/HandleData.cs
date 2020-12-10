@@ -13,14 +13,14 @@ namespace PlanetsDatabase
     class HandleData
     {
         /// <summary>
-        /// TO access planet properties
-        /// </summary>
-        Planet plProperties;
-
-        /// <summary>
-        /// TO use on linq request query
+        /// To use on linq
         /// </summary>
         IEnumerable<Planet> planetsQuery;
+
+        /// <summary>
+        /// To use on linq
+        /// </summary>
+        IEnumerable<Stars> starsQuery;
 
         // To count elements in collection
         private int count = 1;
@@ -29,21 +29,23 @@ namespace PlanetsDatabase
         /// To create a newlist which will store a amount of elements from the
         /// original list
         /// </summary>
-        List<Planet> newPlList;
+        private List<Planet> newPlList;
 
         /// <summary>
-        /// Get access to input property for items search
+        /// To create a newlist which will store a amount of elements from the
+        /// original list
         /// </summary>
-        ContentSorter contentSorterInput;
+        private List<Stars> newSTList;
 
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public HandleData() 
         {
-
-            contentSorterInput = new ContentSorter();
-
-            // To be able to create new list to save 20 elements of 
-            //the original list
             newPlList = new List<Planet>();
+
+            newSTList = new List<Stars>();
         }
 
 
@@ -69,12 +71,14 @@ namespace PlanetsDatabase
             // Elements of the orirginal list.
             while (count <= contentList.Count && isActive)
             {
-                // Check the remaining contents in the list and print out each one
+                // Check remaining contents in the list and print out each one
                 if (contentList.Count < 20)
                 {
+                    // Check results that are less than 20
                     for (int i = 0; i < contentList.Count; i++)
                     {
-                        Console.WriteLine($"{count}:" + contentList[i].ToString());
+                        Console.WriteLine($"{count}: " + 
+                            contentList[i].ToString());
                         count++;
                         isActive = false;
                         continue;
@@ -87,7 +91,8 @@ namespace PlanetsDatabase
                     {
                         // Print out the elements with a number of the index of
                         // the element
-                        Console.WriteLine($"{count}:" + newPlList[i].ToString());
+                        Console.WriteLine($"{count}: " + 
+                            newPlList[i].ToString());
                         count++;
 
                         // to check if the count is 20 to ask to see the next page
@@ -96,7 +101,7 @@ namespace PlanetsDatabase
                         {
                             Console.WriteLine();
                             Console.WriteLine("Press any key to go to next " +
-                                "page...");
+                                "page... ");
                             Console.ReadLine();
 
                             // Clear the elements in the list to print out new ones
@@ -134,156 +139,241 @@ namespace PlanetsDatabase
             }
         }
 
-        string auxForSPlit;
-
+        /// <summary>
+        /// Planets Query 
+        /// </summary>
+        /// <param name="planetContents"></param>
+        /// <param name="list"></param>
         public void GetUserInputPlanets(string[] planetContents, List<Planet> list)
         {
+            // Assigning incomping parameter list to existing list
             newPlList = list;
 
-            Console.WriteLine("debug: " + planetContents[0]);
-            Console.WriteLine("debug: " + planetContents[1]);
-
+            // Query for the list of planet to manipulate the contents and
+            // verifies if the content coming from the user in that section is
+            // available or not and returns the content if there is a match 
+            // with the original file and nothing if condition is false
             planetsQuery = (from items in newPlList
                               where ( 
-                               
-                               planetContents[0] != null ?
-                                items.PlanetName.ToLower().Contains(planetContents[0].ToLower()) 
+                                planetContents[0] != null ?
+                                items.PlanetName.ToLower().Contains
+                                (planetContents[0].ToLower()) 
                                 : items.PlanetName.ToLower().Contains("")
                               
-                               && (planetContents[2] != null ?
-                               items.PlanetOrbper.Contains(planetContents[2]) : items.PlanetOrbper.Contains(""))
+                                && (planetContents[2] != null ?
+                                items.PlanetOrbper.Contains(planetContents[2]) :
+                                items.PlanetOrbper.Contains(""))
 
+                                && (planetContents[4] != null ?
+                                items.Radius.Contains(planetContents[4]) : 
+                                items.Radius.Contains(""))
 
+                                && (planetContents[6] != null ?
+                                items.Masse.Contains(planetContents[6]) : 
+                                items.Masse.Contains(""))
+
+                                && (planetContents[8] != null ?
+                                items.PlanetEqt.Contains(planetContents[8]) : 
+                                items.PlanetEqt.Contains(""))
+
+                                && (planetContents[10] != null ?
+                                items.HostName.Contains(planetContents[10]) : 
+                                items.HostName.Contains(""))
+
+                                && (planetContents[10] != null ?
+                                items.DiscoveryMethod.Contains
+                                (planetContents[10]) : 
+                                items.DiscoveryMethod.Contains(""))
+
+                                && (planetContents[10] != null ?
+                                items.DiscYear.Contains(planetContents[10]) : 
+                                items.DiscYear.Contains(""))
+
+                               && (planetContents[10] != null ?
+                               items.SyDist.Contains(planetContents[10]) : 
+                               items.SyDist.Contains(""))
                                )
-
-                           //where planetContents[2].Contains(items.PlanetName)
-                           //where planetContents[3].Contains(items.PlanetName)
-                           //where planetContents[4].Contains(items.PlanetName)
-
-                           //where planetContents[5].Contains(
-                           //    items.HostName.ToLower())
-                           //where planetContents[6].Contains(
-                           //    items.DiscoveryMethod)
-                           //where planetContents[7].Contains(items.DiscYear)
-                           //where planetContents[8].Contains(items.SyDist)
 
             select new Planet(items.PlanetName, items.PlanetOrbper, 
             items.Radius, items.Masse, items.PlanetEqt, items.HostName, 
             items.DiscoveryMethod, items.DiscYear, items.SyDist)).ToList();
 
-
+            // Gets the elements of the list from the query based on users
+            // input
             GetPlanetItems(planetsQuery.ToList());
-
-
-            //foreach (Planet item in planetsQuery)
-            //{
-            //    Console.WriteLine(item.ToString());
-            //}
         }
 
-        
+        /* End of Planets code section
+         * ====================================================================
+         * ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+         * ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+         * ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+         * ====================================================================
+         * Start of Stars Code Section
+         */
 
+        /// <summary>
+        /// Stores the contents of the original list and skips through its
+        /// content.
+        /// </summary>
+        /// <param name="contentList"> Get original list</param>
+        public void GetStarsItems(List<Stars> contentList)
+        {
+            // To get access to the index of element of the list contents
+            int index = 20;
 
+            // Set false to exit while loop
+            bool isActive = true;
 
+            // Take the first 20 items of the original list and save to the
+            // new List
+            newSTList = contentList.Take(index).ToList();
 
+            // check the countent in the list and do the following while the
+            // count of the elements in the list is not equal to the max
+            // Elements of the orirginal list.
+            while (count <= contentList.Count && isActive)
+            {
+                // Check remaining contents in the list and print out each one
+                if (contentList.Count < 20)
+                {
+                    // Check results that are less than 20
+                    for (int i = 0; i < contentList.Count; i++)
+                    {
+                        Console.WriteLine($"{count}: " +
+                            contentList[i].ToString());
+                        count++;
+                        isActive = false;
+                        continue;
+                    }
+                }
 
+                else
+                {
+                    for (int i = 0; i < 20; i++)
+                    {
+                        // Print out the elements with a number of the index of
+                        // the element
+                        Console.WriteLine($"{count}: " +
+                            newSTList[i].ToString());
+                        count++;
 
+                        // to check if the count is 20 to ask to see the next page
+                        // of content
+                        if (count == index)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Press any key to go to next " +
+                                "page...");
+                            Console.ReadLine();
 
-        //// Save input from user
-        ////private Planet inputContentPl;
+                            // Clear the elements in the list to print out new ones
+                            newSTList.Clear();
 
-        //// Variables to store each camp to compare with the lists content
-        //private string searchedHostname;
-        //private string searchedDiscovMethod;
-        //private string searchedDiscYear;
-        //private string searchedSyDist;
+                            // Clear Console for a nice look
+                            Console.Clear();
 
-        //private string searchedPlName;
-        //private string searchedPlOrber;
-        //private string searchedPlRadius;
-        //private string searchedPlMasse;
-        //private string searchedPlEqt;
+                            // Add 20 to the index so the next 20 elements are
+                            // showed/added to the new list
+                            index += 20;
 
-        ////private string starTemp;
-        ////private string starRadius;
-        ////private string starMass;
-        ////private string starAge;
-        ////private string starVsin;
-        ////private string starRotq;
+                            // Skip the elements of the list by its index
+                            newSTList = contentList.Skip(index).ToList();
+                        }
 
-        //public Planet searchedItem;
+                        // To check the last elements left in the list and break
+                        // so it does not exceed the index bondaries on list
+                        if (newSTList.Count < 20 && i >= newSTList.Count)
+                        {
+                            isActive = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            // Check the remaining contents in the list and print out each one
+            if (newSTList.Count < 20)
+            {
+                for (int i = 0; i < newSTList.Count; i++)
+                {
+                    Console.WriteLine($"{count}:" + newSTList[i].ToString());
+                    count++;
+                }
+            }
+        }
 
-        //int? foundInFile = 0;
+        /// <summary>
+        /// Stars Query 
+        /// </summary>
+        /// <param name="planetContents"></param>
+        /// <param name="list"></param>
+        public void GetUserInputStars(string[] starsContents, List<Stars> list)
+        {
+            // Assigning incomping parameter list to existing list
+            newSTList = list;
 
-        //public HandleData(List<Planet> planetsInFile) 
-        //{
+            // Query for the list of planet to manipulate the contents and
+            // verifies if the content coming from the user in that section is
+            // available or not and returns the content if there is a match 
+            // with the original file and nothing if condition is false
+            starsQuery = (from items in newSTList
+                            where (
+                            starsContents[0] != null ?
+                                items.StarTemperature.ToLower().Contains
+                                (starsContents[0].ToLower())
+                                : items.StarTemperature.ToLower().Contains("")
 
-        //    planetCollectionInFile = planetsInFile ?? null;
+                                && (starsContents[2] != null ?
+                                items.Radius.Contains(starsContents[2]) :
+                                items.Radius.Contains(""))
 
-        //    contentFoundInFile = foundInFile ?? 0;
+                                && (starsContents[4] != null ?
+                                items.Masse.Contains(starsContents[4]) :
+                                items.Masse.Contains(""))
 
-        //    searchedPlName = searchedItem.PlanetName;
-        //    searchedPlOrber = searchedItem.PlanetOrbper;
-        //    searchedPlRadius = searchedItem.Radius;
-        //    searchedPlMasse = searchedItem.Masse;
-        //    searchedPlEqt = searchedItem.PlanetEqt;
-        //    searchedHostname = searchedItem.HostName;
-        //    searchedDiscovMethod = searchedItem.DiscoveryMethod;
-        //    searchedDiscYear = searchedItem.DiscYear;
-        //    searchedSyDist = searchedItem.SyDist;
+                                && (starsContents[6] != null ?
+                                items.StarAge.Contains(starsContents[6]) :
+                                items.StarAge.Contains(""))
 
-        //    planetCollectionInFile = new List<Planet>(contentFoundInFile);
+                                && (starsContents[8] != null ?
+                                items.StarVsin.Contains(starsContents[8]) :
+                                items.StarVsin.Contains(""))
 
-        //    SetResultsPlanets();
-        //}
+                                && (starsContents[10] != null ?
+                                items.StarRotq.Contains
+                                (starsContents[10]) :
+                                items.StarRotq.Contains(""))
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public void SetResultsPlanets()
-        //{
-        //    Console.WriteLine(searchedHostname);
-        //    Console.WriteLine(searchedDiscovMethod);
-        //    Console.WriteLine(searchedDiscYear);
-        //    Console.WriteLine(searchedSyDist);
+                                && (starsContents[12] != null ?
+                                items.HostName.ToLower().Contains
+                                (starsContents[12].ToLower()) :
+                                items.HostName.ToLower().Contains(""))
 
-        //    Console.WriteLine(searchedPlName);
-        //    Console.WriteLine(searchedPlOrber);
-        //    Console.WriteLine(searchedPlRadius);
-        //    Console.WriteLine(searchedPlMasse);
-        //    Console.WriteLine(searchedPlEqt);
+                                && (starsContents[14] != null ?
+                                items.DiscYear.Contains(starsContents[14]) :
+                                items.DiscYear.Contains(""))
+                             
 
-        //    //Console.WriteLine(starTemp);
-        //    //Console.WriteLine(starRadius);
-        //    //Console.WriteLine(starMass);
-        //    //Console.WriteLine(starAge);
-        //    //Console.WriteLine(starVsin);
-        //    //Console.WriteLine(starRotq);
+                                && (starsContents[16] != null ?
+                                items.DiscoveryMethod.ToLower().Contains
+                                (starsContents[16].ToLower()) :
+                                items.DiscoveryMethod.ToLower().Contains(""))
 
-        //    planetCollectionInFile =
-        //        (from content in planetCollectionInFile
-        //         where (content.HostName).ToLower().Contains(content.HostName.ToLower())
-        //         where (content.DiscoveryMethod).ToLower().
-        //         Contains(content.DiscoveryMethod.ToLower())
-        //         where (content.DiscYear.Equals(content.DiscYear))
-        //         where (content.SyDist).Equals(content.SyDist)
+                                && (starsContents[18] != null ?
+                                items.SyDist.Contains
+                                (starsContents[18].ToLower()) :
+                                items.SyDist.Contains(""))
+                                )
 
-        //         where (content.PlanetName).ToLower().
-        //         Contains(content.PlanetName.ToLower())
-        //         where (content.PlanetOrbper).Equals(content.PlanetOrbper)
-        //         where (content.Radius).Equals(content.Radius)
-        //         where (content.Masse).Equals(content.Masse)
-        //         where (content.PlanetEqt).Equals(content.PlanetEqt)
+                            select new Stars(items.StarTemperature, items.Radius,
+                            items.Masse, items.StarAge, items.StarVsin,
+                            items.StarRotq, items.HostName, items.DiscYear,
+                            items.DiscoveryMethod, items.SyDist)).ToList();
 
-        //         select new Planet(content.PlanetName, content.PlanetOrbper,
-        //         content.Radius, content.Masse, content.PlanetEqt,
-        //         content.HostName, content.DiscoveryMethod, content.DiscYear,
-        //         content.SyDist)).ToList();
-
-
-        //    PlanetDisplayContent();
-        //    planetCollectionInFile.Clear();
-        //}
+            // Gets the elements of the list from the query based on users
+            // Input
+            GetStarsItems(starsQuery.ToList());
+        }
     }
 }
 

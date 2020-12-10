@@ -22,8 +22,14 @@
         /// </summary>
         public string SyDist { get; }
 
+        /// <summary>
+        /// Get radius of stars and planets
+        /// </summary>
         public string Radius { get; }
 
+        /// <summary>
+        /// Get Masse of stars and planets
+        /// </summary>
         public string Masse { get; }
     }
 }

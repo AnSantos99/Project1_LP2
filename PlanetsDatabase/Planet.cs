@@ -78,6 +78,10 @@ namespace PlanetsDatabase
             SyDist = syDist;
         }
 
+        /// <summary>
+        /// Override of to string to print out results
+        /// </summary>
+        /// <returns> content of list </returns>
         public override string ToString()
         {
             return $"{PlanetName} | {PlanetOrbper} | {Radius} | {Masse} | " +

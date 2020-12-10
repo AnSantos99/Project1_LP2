@@ -39,9 +39,12 @@ namespace PlanetsDatabase
         {
             Console.WriteLine($"You can choose what camps you want to see." +
                 "Add '+' after each word if you want to see additional " +
-                "information in the following order:\n" +
-                "Planet name + Planet Orber + Radius + Masse + Planet Eqt + " +
-                "Hostname + Discovery Method + Discovery Year + SyDist\n");
+                "information. Please use the indexes with the coma:\n\n" +
+                "1,Planetname + ,2,Planet Orber + ,3,Radius + ,4,Masse + " +
+                ",5,PlanetEqt + ,6,Hostname + ,7,Discovery Method + " +
+                ",8,Discovery Year + ,9,SyDist\n\n" +
+                "The order is indiferent.\n\n" +
+                "Example of search: 1,BD + ,2,");
         }
 
         /// <summary>
@@ -52,12 +55,14 @@ namespace PlanetsDatabase
         /// </summary>
         public void StarsMenu()
         {
-            Console.WriteLine($"You can choose what camps you want to see.\n" +
+            Console.WriteLine($"You can choose what camps you want to see." +
                 "Add '+' after each word if you want to see additional " +
-                "information in the following order:\n" +
-                "Star Temperature + Radius + Masse + StarMass + Star Vsin " +
-                "Star Rotq + Hostname + Discovery Year + Discovery Method +" +
-                "SyDist\n");
+                "information. Please use the indexes with the coma:\n\n" +
+                "1,StarTemperature + ,2,StarRadius + ,3,StarMass + ,4,StarAge " +
+                "+,5,StarVsin + ,6,StarRotq + ,7,Hostname + ,8,Discovery Year " +
+                "+ ,9,DiscoveryMethod + ,10,SyDist\n\n" +
+                "The order is indiferent.\n\n" +
+                "Example of search: 7,47\n");
         }
 
         /// <summary>
@@ -66,9 +71,7 @@ namespace PlanetsDatabase
         /// </summary>
         public void ContentMenuMenu() 
         {
-            Console.WriteLine(
-                "Press 'Enter' to go back to main Menu.\n" +
-                "Press 'Q' To exit from the application.");
+            Console.WriteLine("Press 'q' to go back to main Menu.");
         }
     }
 }

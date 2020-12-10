@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 
 namespace PlanetsDatabase
 {
@@ -22,28 +19,37 @@ namespace PlanetsDatabase
         public string[] UserInputArr { get; private set; }
 
         /// <summary>
-        /// To be able for the user to split search information using a + as
-        /// the splitter between each camp
+        /// To be able for the user to split search information using a + and ,
+        /// as the splitter between each camp and index
         /// </summary>
-        /// <param name="search"></param>
         public void SplitSearch()
         {
+            // Array of strings aux lenght
             string[] aux = new string[] { };
 
-            string[] final = new string[11];
+            // Array of string to save final lenght of input content
+            string[] final = new string[20];
 
-            string hahah;
+            // For the secondary split
+            string secSplit;
 
+            // Assignment of original array
             UserInputArr = new string[] { };
 
+            // Split the incoming content with a +
             UserInputArr = ReadInput.Split("+");
 
-            hahah = string.Join(null, UserInputArr);
+            // Assign to the secpSplit the combination of the first split
+            secSplit = string.Join(null, UserInputArr);
 
-            aux = hahah.Split(",");
+            // Assign the secondary split to the aux Array
+            aux = secSplit.Split(",");
 
+            // Outside Loop variable to manipulate the index
             int j = 1;
 
+            // Return every odd index element of the contents saved in the
+            // Array from the input of the user
             for (int i = 0; i < aux.Length; i++)
             {
                 if (i % 2 == 0 && j < Convert.ToInt32(aux[i]))
@@ -52,6 +58,7 @@ namespace PlanetsDatabase
                 }
             }
 
+            // Do the same but this time revert
             for (int i = 0; i <= aux.Length; i++)
             {       
                 if (i % 2 == 0)
@@ -64,17 +71,13 @@ namespace PlanetsDatabase
                 }
             }
 
-            foreach(string str in final)
-            {
-                Console.WriteLine(str);
-            }
-
+            // Assignment of the original to the last array with the splits
             UserInputArr = final;
         }
 
         /// <summary>
-        /// Metho that checks wether a string is null or doesnt present blank
-        /// spaces
+        /// Method that checks wether a string is null or doesnt present blank
+        /// spaces and return the content given by the user
         /// </summary>
         /// <param name="input"> Console.ReadLine variable </param>
         public void CheckInput(string input) 
