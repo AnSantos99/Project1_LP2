@@ -4,6 +4,7 @@
 ## Authors
 
 **Ana Santos** - a21900297
+
 **Joana Silva** - a21805651
 
 ## Work distribution
@@ -59,5 +60,6 @@ On the Menu, the user will be asked if they want information on the Stars or the
 ### Colleagues Input
 
 **Diana Levay** for troubleshooting and help in understanding and implementing parts of the code, as well as good strategies.
+
 **Francisco Pires** to discuss ideas for the project's structure.
 
