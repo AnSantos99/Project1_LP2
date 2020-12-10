@@ -7,10 +7,6 @@ namespace PlanetsDatabase
 {
     class InputContent
     {
-        private AccessFile file;
-
-        public HandleData DatabaseContent;
-
         // Acess planet data
         private Planet planet;
 
@@ -28,14 +24,6 @@ namespace PlanetsDatabase
 
             plCamp = new List<Planet>();
         }
-
-
-        public InputContent(AccessFile file)
-        {
-            this.file = file;
-        }
-
-        
 
         public void MainMenuInput(AccessFile file)
         {
@@ -108,12 +96,6 @@ namespace PlanetsDatabase
 
             // Ask user if he wants to know more information about a content
             // to pick up the number of the object
-
-
-
-            plCamp.Add(new Planet(planet.PlanetName, planet.PlanetOrbper,
-                planet.Radius, planet.Masse, planet.PlanetEqt, planet.HostName,
-                planet.DiscoveryMethod, planet.DiscYear, planet.SyDist));
 
             //DatabaseContent = new HandleData(plCamp, file);
         }

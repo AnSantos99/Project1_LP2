@@ -101,7 +101,7 @@ namespace PlanetsDatabase
                     SplitContent(line);
                 }
             }
-            handleData.GetSections(contentCollPlanet);
+            handleData.GetPlanetItems(contentCollPlanet);
 
         }
 
