@@ -26,7 +26,7 @@ namespace PlanetsDatabase
 
         public ICollection<Stars> contentCollStars;
 
-        private HandleData handleData;
+        public HandleData handleData;
 
         private InputContent inputContent;
 
@@ -56,7 +56,6 @@ namespace PlanetsDatabase
             // Specified path to open the file
             path = Path.Combine(Environment.GetFolderPath(
                 Environment.SpecialFolder.Desktop), fileToOpen);
-                
             try
             { 
                 using (
@@ -101,7 +100,7 @@ namespace PlanetsDatabase
                     SplitContent(line);
                 }
             }
-            handleData.GetPlanetItems(contentCollPlanet);
+            //handleData.GetPlanetItems(contentCollPlanet);
 
         }
 
@@ -167,31 +166,6 @@ namespace PlanetsDatabase
         /* ----- Verification methods ----- */
 
         /// <summary>
-        /// To check if the file contains to types of necessary camps
-        /// </summary>
-        /// <param name="sections"> Receives content of file </param>
-        public void checkData(string[] sections)
-        {
-            // To go throught sections and store those 2 searched strings
-            // in this variable
-            IEnumerable<string> obligatoryCamps;
-
-            // Query to go through file and see if obligatory camps are there
-            obligatoryCamps = from lines in sections
-                                where lines.Contains("pl_name".ToLower()) ||
-                                lines.Contains("hostname".ToLower())
-                                select lines;
-
-            //if (!obligatoryCamps.Any())
-            //{
-            //    Console.Write("This file does not contain the obligatory" +
-            //    "Camps needed in order to use this program properly.\n" +
-            //    "Obligatory camps are:\npl_name (Planet names) and " +
-            //    "hostname.\n");
-            //}
-        }
-
-        /// <summary>
         /// Checks the files ending. If it's not .csv
         /// Throw a exception
         /// </summary>
@@ -214,5 +188,29 @@ namespace PlanetsDatabase
             }
         }
 
+        /// <summary>
+        /// To check if the file contains to types of necessary camps
+        /// </summary>
+        /// <param name="sections"> Receives content of file </param>
+        public void checkData(string[] sections)
+        {
+            // To go throught sections and store those 2 searched strings
+            // in this variable
+            IEnumerable<string> obligatoryCamps;
+
+            // Query to go through file and see if obligatory camps are there
+            obligatoryCamps = from lines in sections
+                              where lines.Contains("pl_name".ToLower()) ||
+                              lines.Contains("hostname".ToLower())
+                              select lines;
+
+            if (!obligatoryCamps.Any())
+            {
+                Console.Write("This file does not contain the obligatory" +
+                "Camps needed in order to use this program properly.\n" +
+                "Obligatory camps are:\npl_name (Planet names) and " +
+                "hostname.\n");
+            }
+        }
     }
 }

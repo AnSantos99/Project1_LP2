@@ -12,6 +12,16 @@ namespace PlanetsDatabase
     /// </summary>
     class HandleData
     {
+        /// <summary>
+        /// TO access planet properties
+        /// </summary>
+        Planet plProperties;
+
+        /// <summary>
+        /// TO use on linq request query
+        /// </summary>
+        IEnumerable<Planet> planetsQuery;
+
         // To count elements in collection
         private int count = 1;
 
@@ -20,6 +30,21 @@ namespace PlanetsDatabase
         /// original list
         /// </summary>
         List<Planet> newPlList;
+
+        /// <summary>
+        /// Get access to input property for items search
+        /// </summary>
+        ContentSorter contentSorterInput;
+
+        public HandleData() 
+        {
+
+            contentSorterInput = new ContentSorter();
+
+            // To be able to create new list to save 20 elements of 
+            //the original list
+            newPlList = new List<Planet>();
+        }
 
 
         /// <summary>
@@ -35,9 +60,6 @@ namespace PlanetsDatabase
             // Set false to exit while loop
             bool isActive = true;
 
-            // Create new list to save 20 elements of the original list
-            newPlList = new List<Planet>();
-
             // Take the first 20 items of the original list and save to the
             // new List
             newPlList = contentList.Take(index).ToList();
@@ -47,43 +69,58 @@ namespace PlanetsDatabase
             // Elements of the orirginal list.
             while (count <= contentList.Count && isActive)
             {
-                for (int i = 0; i < 20; i++)
+                // Check the remaining contents in the list and print out each one
+                if (contentList.Count < 20)
                 {
-                    // Print out the elements with a number of the index of
-                    // the element
-                    Console.WriteLine($"{count}:" + newPlList[i].ToString());
-                    count++;
-
-                    // to check if the count is 20 to ask to see the next page
-                    // of content
-                    if (count == index)
+                    for (int i = 0; i < contentList.Count; i++)
                     {
-                        Console.WriteLine();
-                        Console.WriteLine("Press any key to go to next " +
-                            "page...");
-                        Console.ReadLine();
-
-                        // Clear the elements in the list to print out new ones
-                        newPlList.Clear();
-                        
-                        // Clear Console for a nice look
-                        Console.Clear();
-
-                        // Add 20 to the index so the next 20 elements are
-                        // showed/added to the new list
-                        index += 20;
-
-                        // Skip the elements of the list by its index
-                        newPlList = contentList.Skip(index).ToList();
-                    }
-
-                    // To check the last elements left in the list and break
-                    // so it does not exceed the index bondaries on list
-                    if (newPlList.Count < 20 && i >= newPlList.Count)
-                    {
+                        Console.WriteLine($"{count}:" + contentList[i].ToString());
+                        count++;
                         isActive = false;
-                        break;
-                    } 
+                        continue;
+                    }
+                }
+
+                else
+                {
+                    for (int i = 0; i < 20; i++)
+                    {
+                        // Print out the elements with a number of the index of
+                        // the element
+                        Console.WriteLine($"{count}:" + newPlList[i].ToString());
+                        count++;
+
+                        // to check if the count is 20 to ask to see the next page
+                        // of content
+                        if (count == index)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("Press any key to go to next " +
+                                "page...");
+                            Console.ReadLine();
+
+                            // Clear the elements in the list to print out new ones
+                            newPlList.Clear();
+
+                            // Clear Console for a nice look
+                            Console.Clear();
+
+                            // Add 20 to the index so the next 20 elements are
+                            // showed/added to the new list
+                            index += 20;
+
+                            // Skip the elements of the list by its index
+                            newPlList = contentList.Skip(index).ToList();
+                        }
+
+                        // To check the last elements left in the list and break
+                        // so it does not exceed the index bondaries on list
+                        if (newPlList.Count < 20 && i >= newPlList.Count)
+                        {
+                            isActive = false;
+                            break;
+                        }
+                    }
                 }
             }
             // Check the remaining contents in the list and print out each one
@@ -97,14 +134,54 @@ namespace PlanetsDatabase
             }
         }
 
+        string auxForSPlit;
 
-        public void GetPlanetCampsForInput() 
+        public void GetUserInputPlanets(string[] planetContents, List<Planet> list)
         {
-            // Get the properties
-            Planet plProperties;
+            newPlList = list;
+
+            Console.WriteLine("debug: " + planetContents[0]);
+            Console.WriteLine("debug: " + planetContents[1]);
+
+            planetsQuery = (from items in newPlList
+                              where ( 
+                               
+                               planetContents[0] != null ?
+                                items.PlanetName.ToLower().Contains(planetContents[0].ToLower()) 
+                                : items.PlanetName.ToLower().Contains("")
+                              
+                               && (planetContents[2] != null ?
+                               items.PlanetOrbper.Contains(planetContents[2]) : items.PlanetOrbper.Contains(""))
 
 
+                               )
+
+                           //where planetContents[2].Contains(items.PlanetName)
+                           //where planetContents[3].Contains(items.PlanetName)
+                           //where planetContents[4].Contains(items.PlanetName)
+
+                           //where planetContents[5].Contains(
+                           //    items.HostName.ToLower())
+                           //where planetContents[6].Contains(
+                           //    items.DiscoveryMethod)
+                           //where planetContents[7].Contains(items.DiscYear)
+                           //where planetContents[8].Contains(items.SyDist)
+
+            select new Planet(items.PlanetName, items.PlanetOrbper, 
+            items.Radius, items.Masse, items.PlanetEqt, items.HostName, 
+            items.DiscoveryMethod, items.DiscYear, items.SyDist)).ToList();
+
+
+            GetPlanetItems(planetsQuery.ToList());
+
+
+            //foreach (Planet item in planetsQuery)
+            //{
+            //    Console.WriteLine(item.ToString());
+            //}
         }
+
+        
 
 
 

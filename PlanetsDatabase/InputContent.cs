@@ -5,100 +5,83 @@ using System.Threading;
 
 namespace PlanetsDatabase
 {
+    /// <summary>
+    /// Class based on the users input and its verification
+    /// </summary>
     class InputContent
     {
-        // Acess planet data
-        private Planet planet;
-
-        // List of plCamps
-        private List<Planet> plCamp;
-
         /// <summary>
         /// To get the input of the user
         /// </summary>
-        public string readInput { get; set; }
+        public string ReadInput { get; private set; }
 
-        public InputContent() 
+        /// <summary>
+        /// Unchangeable array for the users input to search information
+        /// about the planets/stars
+        /// </summary>
+        public string[] UserInputArr { get; private set; }
+
+        /// <summary>
+        /// To be able for the user to split search information using a + as
+        /// the splitter between each camp
+        /// </summary>
+        /// <param name="search"></param>
+        public void SplitSearch()
         {
-            planet = new Planet();
+            string[] aux = new string[] { };
 
-            plCamp = new List<Planet>();
-        }
+            string[] final = new string[11];
 
-        public void MainMenuInput(AccessFile file)
-        {
-            try
+            string hahah;
+
+            UserInputArr = new string[] { };
+
+            UserInputArr = ReadInput.Split("+");
+
+            hahah = string.Join(null, UserInputArr);
+
+            aux = hahah.Split(",");
+
+            int j = 1;
+
+            for (int i = 0; i < aux.Length; i++)
             {
-                readInput = Console.ReadLine().ToLower();
-
-                switch (readInput)
+                if (i % 2 == 0 && j < Convert.ToInt32(aux[i]))
                 {
-                    case "1":
-                        Console.WriteLine("Planets Info");
-                        Console.WriteLine("Write down name:");
-                        //UserInputPlanet();
-                        //DatabaseContent = new HandleData(file.ListOfContent, input);
-                        //DatabaseContent.SetResults();
-
-                        break;
-
-                    case "2":
-                        Console.WriteLine("Stars Info");
-                        break;
-
-                    case "q":
-                        Console.WriteLine("Exiting application.\n" +
-                            "Thank you for your time!");
-                        Thread.Sleep(3000);
-                        Environment.Exit(0);
-                        break;
-
-                    default:
-                        throw new FormatException(
-                            $"{readInput} is invalid.\n");
+                    j = Convert.ToInt32(aux[i]);
                 }
             }
-            catch (FormatException e)
-            {
-                Console.WriteLine("Please choose the options available ", e);
+
+            for (int i = 0; i <= aux.Length; i++)
+            {       
+                if (i % 2 == 0)
+                {
+                    int num = Array.IndexOf(aux, j.ToString());
+
+                    final.SetValue(aux[num + 1], i);
+
+                    j++;
+                }
             }
+
+            foreach(string str in final)
+            {
+                Console.WriteLine(str);
+            }
+
+            UserInputArr = final;
         }
 
-        public void UserInputPlanet(List<Planet> plList)
+        /// <summary>
+        /// Metho that checks wether a string is null or doesnt present blank
+        /// spaces
+        /// </summary>
+        /// <param name="input"> Console.ReadLine variable </param>
+        public void CheckInput(string input) 
         {
-
-            //Console.WriteLine("1.PL_Name, 2.PL_orber");
-
-            //readInput = Console.ReadLine();
-            //if (readInput == "1.")
-            //{
-            //    readInput.
-            //    readInput = planet.PlanetName;
-            //}
-            
-
-            //if (planet.PlanetName.Contains(readInput))
-            //{
-            //    plList.Add(new Planet(planet.PlanetName));
-            //}
-
-
-
-            readInput = Console.ReadLine().ToLower();
-
-            // Compare input with list content
-            
-
-            // if match, print out the compared input (maybe insert here
-            // the method in handle data or ao contrario
-
-            // ignore the rest of the camps
-
-            // Ask user if he wants to know more information about a content
-            // to pick up the number of the object
-
-            //DatabaseContent = new HandleData(plCamp, file);
+            if (input != null)
+                if (input != "" || input != " ")
+                    ReadInput = input;
         }
-
     }
 }

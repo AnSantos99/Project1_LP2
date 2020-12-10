@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace PlanetsDatabase
 {
+    /// <summary>
+    /// Class that sorts contents from the elements in file
+    /// </summary>
     class ContentSorter
     {
         /// <summary>
@@ -23,5 +26,6 @@ namespace PlanetsDatabase
         {
             st.OrderByDescending(name => name.HostName);
         }
+
     }
 }
